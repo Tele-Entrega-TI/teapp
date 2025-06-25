@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25/06/2025 às 19:22
+-- Tempo de geração: 25/06/2025 às 22:09
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -299,8 +299,16 @@ CREATE TABLE `cad_subs` (
   `id_funcionario_substituto` int(15) NOT NULL,
   `custo_sub` double(10,2) NOT NULL,
   `data` date NOT NULL,
-  `id_locacao` int(15) NOT NULL
+  `id_locacao` int(15) NOT NULL,
+  `ativo` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Tabela para cadastro de substitutos';
+
+--
+-- Despejando dados para a tabela `cad_subs`
+--
+
+INSERT INTO `cad_subs` (`id_substituto`, `id_funcionario_falta`, `id_funcionario_substituto`, `custo_sub`, `data`, `id_locacao`, `ativo`) VALUES
+(1, 1, 2, 374.00, '2025-06-25', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -703,7 +711,7 @@ ALTER TABLE `cad_setores`
 -- AUTO_INCREMENT de tabela `cad_subs`
 --
 ALTER TABLE `cad_subs`
-  MODIFY `id_substituto` int(15) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_substituto` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `cad_veiculos`

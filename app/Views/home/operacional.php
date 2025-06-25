@@ -93,9 +93,12 @@
                             </a>
                         </div>
 
-                        
-
-                        
+                        <div class="col-md-4">
+                            <a href="/teapp/substitutos" class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
+                                <iconify-icon icon="healthicons:truck-driver-outline" class="icon text-lg"></iconify-icon>
+                                Substituições
+                            </a>
+                        </div>
 
                     </div>
                 </div>
