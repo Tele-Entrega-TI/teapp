@@ -55,6 +55,10 @@ class Substitutos {
 
         if ($ret <> 0) {
             $this->dados = $ret;
+
+            $this->dados['funcionarios'] = $model->listar_funcionarios();
+            $this->dados['locacoes'] = $model->listar_locacoes();
+
             $view = new \Core\View("substitutos/editar");
             $view->setDados($this->dados);
             $view->load();
