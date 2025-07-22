@@ -43,7 +43,7 @@ class View
                 $this->alert = "<script type='text/javascript'>
                     Swal.fire(
                       'Erro!',
-                      'Não foi possivel excluir o registro!',
+                      'Não foi possivel atualizar o registro!',
                       'error'
                     )
                 </script>";

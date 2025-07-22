@@ -87,7 +87,7 @@
           </li>
           
           <li>
-            <a href="invoice-edit.html"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Intercorrencias</a>
+            <a href="./intercorrencias"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Intercorrencias</a>
           </li>
         </ul>
       </li>
