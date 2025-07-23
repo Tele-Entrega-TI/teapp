@@ -25,7 +25,7 @@
 
             <div class="mb-3">
               <label class="form-label">Motivo</label>
-              <input type="text" name="motivos" id="motivos" class="form-control" required  value="<?= $this->dados['motivos'] ?>">
+              <input type="text" name="motivo" id="motivo" class="form-control" required  value="<?= $this->dados['motivo'] ?>">
               
             </div>
             <input type="hidden" name="id_motivo" id="id_motivo" class="form-control" required  value="<?= $this->dados['id_motivo'] ?>">

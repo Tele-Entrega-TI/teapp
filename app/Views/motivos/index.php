@@ -1,3 +1,4 @@
+
 <div class="dashboard-main-body">
 
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
@@ -41,11 +42,11 @@
                                 if (!empty($this->dados) && is_array($this->dados)) {
                                     foreach ($this->dados as $key) {
                                         echo '<tr>';
-                                        echo '<td class="text-center">' . htmlspecialchars($key['motivos']) . '</td>';
+                                        echo '<td class="text-center">' . ($key['motivo']) . '</td>';
                                         echo '<td class="text-center">' . ($key['ativo'] == 1 ? 'Sim' : 'Não') . '</td>';
                                         echo '<td class="text-center">
-                                            <a href="/teapp/motivos/editar/' . intval($key['id_motivo']) . '" class="btn btn-info btn-sm">Editar</a>
-                                            <a href="/teapp/motivos/excluir/' . intval($key['id_motivo']) . '" class="btn btn-danger btn-sm" onclick="return confirm(\'Tem certeza que deseja excluir este motivo?\');">Excluir</a>
+                                            <a href="/teapp/motivos/editar/' . ($key['id_motivo']) . '" class="btn btn-info btn-sm">Editar</a>
+                                            <a href="/teapp/motivos/excluir/' . ($key['id_motivo']) . '" class="btn btn-danger btn-sm" onclick="return confirm(\'Tem certeza que deseja excluir este motivo?\');">Excluir</a>
                                         </td>';
                                         echo '</tr>';
                                     }

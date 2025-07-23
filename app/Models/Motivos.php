@@ -11,7 +11,7 @@ class Motivos extends DB{
 	}
 
     public function index(){
-        $sql = "SELECT * FROM cad_motivo WHERE ativo = 1 ORDER BY id_motivo DESC";
+        $sql = "SELECT * FROM cad_motivos WHERE ativo = 1 ORDER BY id_motivo DESC";
         $consulta = $this->conn->query($sql);
 
         if ($consulta && $consulta->num_rows > 0) {
@@ -25,15 +25,14 @@ class Motivos extends DB{
     }
 
     public function adicionar(array $dados){
-        $id_motivo = $dados['id_motivo'];
-        $motivos   = $dados['Motivo'];
+        $motivo   = $dados['motivo'];
         $ativo     = $dados['ativo'];
 
-        $sql = " INSERT INTO cad_motivo (
-            motivos,
+        $sql = " INSERT INTO cad_motivos (
+            motivo,
             ativo
         ) VALUES (
-            '$motivos',
+            '$motivo',
             '$ativo'
         )";
     return $this->conn->query($sql);
@@ -41,12 +40,12 @@ class Motivos extends DB{
 
 
 	 public function editar(array $dados){
-        $motivos = $dados['motivos'];
+        $motivo = $dados['motivo'];
         $ativo = $dados['ativo'];
         $id = $dados['id_motivo'];
 
-        $sql = "UPDATE cad_motivo SET
-        motivos = '$motivos',
+        $sql = "UPDATE cad_motivos SET
+        motivo = '$motivo',
         ativo = '$ativo'
         WHERE id_motivo = $id";
             
@@ -63,7 +62,7 @@ class Motivos extends DB{
     }
 
 	public function buscar($id){
-		$sql = "SELECT * FROM cad_motivo WHERE id_motivo = $id";
+		$sql = "SELECT * FROM cad_motivos WHERE id_motivo = $id";
 		$query = $this->conn->query($sql);
 		if ($query && $query->num_rows > 0) {
             return $query->fetch_assoc();
@@ -72,7 +71,7 @@ class Motivos extends DB{
     }
 
     public function excluir($id) {
-        $sql = "UPDATE cad_motivo SET ativo = 0 WHERE id_motivo = $id";
+        $sql = "UPDATE cad_motivos SET ativo = 0 WHERE id_motivo = $id";
         $exec = $this->conn->query($sql);
 
         if ($exec) {

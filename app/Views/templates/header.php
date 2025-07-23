@@ -55,7 +55,7 @@
         </a>
         <ul class="sidebar-submenu">
           <li>
-            <a href=""><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Inicio</a>
+            <a href="./"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Inicio</a>
           </li>
           <li>
             <a href="./operacional"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Operacional</a>
@@ -243,4 +243,5 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
+

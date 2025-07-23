@@ -25,7 +25,7 @@
 
             <div class="mb-3">
               <label class="form-label">Motivo</label>
-              <input type="text" name="Motivo" class="form-control" required>
+              <input type="text" name="motivo" class="form-control" required>
             </div>
 
               <div class="mb-3">

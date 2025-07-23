@@ -24,7 +24,7 @@ class Motivos {
         $model = new \App\Models\Motivos();
         
 
-        $view = new \Core\View("Motivos/adicionar");
+        $view = new \Core\View("motivos/adicionar");
         $view->setDados([]);
         $view->load();
     }
