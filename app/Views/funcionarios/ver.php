@@ -78,6 +78,7 @@
                   <div class="col-md-6 mb-4">
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Dados Profissionais</h6>
                     <div><strong>Cargo:</strong> <?= $f['cargo']; ?></div>
+                    <div><strong>Matrícula:</strong> <?= $f['id_funcionario']; ?></div>
                     <div><strong>Data de Admissão:</strong> <?= !empty($f['data_admissao']) ? date("d/m/Y", strtotime($f['data_admissao'])) : ''; ?></div>
                   </div>
                 </div>
