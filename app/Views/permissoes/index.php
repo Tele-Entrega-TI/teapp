@@ -23,21 +23,19 @@
               <thead>
                 <tr>
                   <th class="text-center">Funcionário</th>
-                  <th class="text-center">CPF</th>
-                  <th class="text-center">Cargo</th>
+                  <th class="text-center">Login/CPF</th>
                   <th class="text-center">Ações</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                if (!empty($this->dados['funcionarios']) && is_array($this->dados['funcionarios'])) {
-                  foreach ($this->dados['funcionarios'] as $func) {
+                if (!empty($this->dados['usuarios']) && is_array($this->dados['usuarios'])) {
+                  foreach ($this->dados['usuarios'] as $usuario) {
                     echo '<tr>';
-                    echo '<td class="text-center">' . $func['nome'] . '</td>';
-                    echo '<td class="text-center">' . $func['cpf'] . '</td>';
-                    echo '<td class="text-center">' . $func['cargo'] . '</td>';
+                    echo '<td class="text-center">' . $usuario['nome_funcionario'] . '</td>';
+                    echo '<td class="text-center">' . $usuario['cpf'] . '</td>';
                     echo '<td class="text-center">';
-                    echo '<a href="/teapp/permissoes/editar/' . $func['id_funcionario'] . '" class="btn btn-sm btn-outline-primary p-3">';
+                    echo '<a href="/teapp/permissoes/editar/' . $usuario['id_funcionario'] . '" class="btn btn-sm btn-outline-primary p-3">';
                     echo '<iconify-icon icon="solar:shield-check-line-duotone" class="icon text-md"></iconify-icon>';
                     echo ' Gerenciar';
                     echo '</a>';
@@ -45,7 +43,7 @@
                     echo '</tr>';
                   }
                 } else {
-                  echo '<tr><td colspan="4" class="text-center text-muted">Nenhum funcionário encontrado.</td></tr>';
+                  echo '<tr><td colspan="3" class="text-center text-muted">Nenhum usuário encontrado.</td></tr>';
                 }
                 ?>
               </tbody>

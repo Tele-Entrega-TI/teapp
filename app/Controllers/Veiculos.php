@@ -7,12 +7,21 @@ class Veiculos {
     private array $dadosAux;
 
     public function __construct() {
-        // Filtro para determinar se o usuário está logado
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+
+        var_dump($_SESSION); // ← aqui, só pra testar
+        exit;
+        
+        if (!isset($_SESSION['id_user'])) {
+             header("Location: /teapp/login");
+             exit;
         }
-        */
+
+        $modulo_id = 2;
+
+        if(!in_array($modulo_id, $_SESSION['modulos'])) {
+            header("Location: /teapp/operacional");
+            exit;
+        }       
     }
 
     public function Index() {

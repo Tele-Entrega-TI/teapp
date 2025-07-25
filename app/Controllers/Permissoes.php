@@ -6,16 +6,18 @@ class Permissoes {
 
     private array $dados;
 
-    public function __construct() {}
+    public function __construct() {
+        // validação de login se quiser
+    }
 
     public function Index() {
-        $model = new \App\Models\Funcionarios();
+        $model = new \App\Models\Usuarios();
         $ret = $model->index();
 
         if ($ret <> false) {
-            $this->dados['funcionarios'] = $ret;
+            $this->dados['usuarios'] = $ret;
         } else {
-            $this->dados['funcionarios'] = [];
+            $this->dados['usuarios'] = array();
         }
 
         $view = new \Core\View("permissoes/index");
@@ -23,12 +25,16 @@ class Permissoes {
         $view->load();
     }
 
+
     public function Editar($id_funcionario) {
         $modelModulos = new \App\Models\Modulos();
         $modelAcesso = new \App\Models\ModulosAcesso();
 
-        $this->dados['modulos'] = $modelModulos->index();
-        $this->dados['acessos'] = $modelAcesso->listar_por_funcionario($id_funcionario);
+        $modulos = $modelModulos->index();
+        $acessos = $modelAcesso->listar_por_funcionario($id_funcionario);
+
+        $this->dados['modulos'] = $modulos;
+        $this->dados['acessos'] = $acessos;
         $this->dados['id_funcionario'] = $id_funcionario;
 
         $view = new \Core\View("permissoes/editar");
@@ -38,25 +44,24 @@ class Permissoes {
 
     public function EditarACT() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id_funcionario = $_POST['id_funcionario'] ?? null;
-            $id_grupo = $_POST['id_grupo'] ?? 0;
+            $id_funcionario = $_POST['id_funcionario'];
 
             $model = new \App\Models\ModulosAcesso();
-
-            // Limpa acessos antigos
             $model->remover_por_funcionario($id_funcionario);
 
             if (!empty($_POST['permissoes']) && is_array($_POST['permissoes'])) {
-                foreach ($_POST['permissoes'] as $id_modulo => $permissoes_modulo) {
-                    foreach ($permissoes_modulo as $tipo) {
-                        $dados = array();
-                        $dados['id_funcionario'] = $id_funcionario;
-                        $dados['id_modulo'] = $id_modulo;
-                        $dados['tipo'] = strtolower($tipo);
-                        $dados['id_grupo'] = $id_grupo;
-
-                        $model->salvar($dados);
+                foreach ($_POST['permissoes'] as $id_modulo => $tipo) {
+                    if ($tipo <> 'v' && $tipo <> 've' && $tipo <> 'ved') {
+                        continue;
                     }
+
+                    $dados = array();
+                    $dados['id_funcionario'] = $id_funcionario;
+                    $dados['id_modulo'] = $id_modulo;
+                    $dados['tipo'] = $tipo;
+                    $dados['id_grupo'] = 0;
+
+                    $model->salvar($dados);
                 }
             }
 

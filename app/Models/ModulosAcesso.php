@@ -22,7 +22,7 @@ class ModulosAcesso extends DB {
                 $id_modulo = $row['id_modulo'];
                 $tipo = $row['tipo'];
 
-                $obj[$id_modulo][] = $tipo;
+                $obj[$id_modulo] = $tipo;
             }
 
             return $obj;
@@ -46,14 +46,14 @@ class ModulosAcesso extends DB {
     public function salvar(array $dados) {
         $id_funcionario = $dados['id_funcionario'];
         $id_modulo = $dados['id_modulo'];
-        $tipo = $dados['tipo'];
+        $tipo = $this->conn->real_escape_string($dados['tipo']);
         $id_grupo = $dados['id_grupo'];
 
         $verifica = $this->buscar($id_funcionario, $id_modulo);
 
         if ($verifica <> 0) {
             $sql = "UPDATE modulos_acesso 
-                    SET tipo = '" . $this->conn->real_escape_string($tipo) . "', 
+                    SET tipo = '$tipo', 
                         id_grupo = $id_grupo
                     WHERE id_funcionario = $id_funcionario AND id_modulo = $id_modulo";
         } else {
@@ -61,7 +61,7 @@ class ModulosAcesso extends DB {
                     VALUES (
                         $id_funcionario,
                         $id_modulo,
-                        '" . $this->conn->real_escape_string($tipo) . "',
+                        '$tipo',
                         $id_grupo
                     )";
         }

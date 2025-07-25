@@ -32,7 +32,6 @@
                                 <tr>
                                     <th class="text-center">Funcionário</th>
                                     <th class="text-center">CPF</th>
-                                    <th class="text-center">Permissão</th>
                                     <th class="text-center">Ativo</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
@@ -45,8 +44,6 @@
 
                                         echo '<td class="text-center">' . $key['nome_funcionario'] . '</td>';
                                         echo '<td class="text-center">' . $key['cpf'] . '</td>';
-                                        echo '<td class="text-center">' . $key['nome_permissao'] . '</td>';
-
                                         echo '<td class="text-center">';
                                         echo ($key['ativo'] == 1)
                                             ? '<span class="text-success">Sim</span>'

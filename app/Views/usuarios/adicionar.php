@@ -39,19 +39,6 @@
               <label class="form-label fw-semibold">CPF (Login)</label>
               <input type="text" name="cpf" class="form-control" maxlength="14" required placeholder="Somente números">
             </div>
-
-            <div class="col-lg-6">
-              <label class="form-label fw-semibold">Permissão</label>
-              <select name="id_permissao" class="form-select" required>
-                <option value="">Selecione...</option>
-                <?php
-                if (!empty($this->dados['permissoes'])) {
-                  foreach ($this->dados['permissoes'] as $perm) {
-                    echo '<option value="' . $perm['id_permissao'] . '">' . $perm['nome_permissao'] . '</option>';
-                  }
-                }
-                ?>
-              </select>
             </div>
             <div class="col-lg-12 text-end">
               <button type="submit" class="btn btn-primary">Salvar</button>

@@ -23,47 +23,53 @@ $id_funcionario = $this->dados['id_funcionario'];
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <h6 class="mb-0"></h6>
-                        </div>
-                        <div class="col-lg-3 text-end">
-                        </div>
-                    </div>
+                    <h6 class="mb-0">Defina os acessos por Módulo</h6>
                 </div>
 
                 <div class="card-body">
                     <form method="post" action="/teapp/permissoes/editaract">
                         <input type="hidden" name="id_funcionario" value="<?= $id_funcionario ?>">
-                        <input type="hidden" name="id_grupo" value="0">
 
-                        <?php foreach ($modulos as $modulo): ?>
-                            <div class="mb-4">
-                                <h6 class="mb-2"><?= strtolower($modulo['nome_modulo']) ?></h6>
+                        <?php foreach ($modulos as $modulo): 
+                            $nivel = $acessos[$modulo['id_modulo']] ?? ''; // 'v', 've' ou 'ved'
+                        ?>
+                        <div class="mb-4">
+                            <h6 class="mb-2 text-capitalize"><?= strtolower($modulo['nome_modulo']) ?></h6>
 
-                                <?php foreach (['visualizar', 'editar', 'criar', 'excluir'] as $tipo): 
-                                    $checked = (
-                                        isset($acessos[$modulo['id_modulo']]) &&
-                                        in_array($tipo, $acessos[$modulo['id_modulo']])
-                                    ) ? 'checked' : '';
-                                ?>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-text">
-                                            <input class="form-check-input mt-0"
-                                                   type="checkbox"
-                                                   name="permissoes[<?= $modulo['id_modulo'] ?>][]"
-                                                   value="<?= $tipo ?>" <?= $checked ?>>
-                                        </div>
-                                        <input type="text" class="form-control" value="<?= $tipo ?>" disabled>
-                                    </div>
-                                <?php endforeach; ?>
+                            <?php
+                            $niveis = [
+                                'v' => 'Visualizar',
+                                've' => 'Visualizar / Editar',
+                                'ved' => 'Visualizar / Editar / Deletar',
+                            ];
+                            ?>
+
+                            <?php foreach ($niveis as $valor => $label): ?>
+                                <div class="form-check mb-1">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="permissoes[<?= $modulo['id_modulo'] ?>]"
+                                           value="<?= $valor ?>"
+                                           <?= ($nivel === $valor ? 'checked' : '') ?>>
+                                    <label class="form-check-label"><?= $label ?></label>
+                                </div>
+                            <?php endforeach; ?>
+
+                            <div class="form-check mt-1">
+                                <input class="form-check-input"
+                                       type="radio"
+                                       name="permissoes[<?= $modulo['id_modulo'] ?>]"
+                                       value=""
+                                       <?= ($nivel === '' ? 'checked' : '') ?>>
+                                <label class="form-check-label text-muted">Sem acesso</label>
                             </div>
-                            <hr>
+                        </div>
+                        <hr>
                         <?php endforeach; ?>
 
                         <div class="text-end">
                             <button type="submit" class="btn btn-success">Salvar Permissões</button>
-                            <a href="/teapp/usuarios" class="btn btn-outline-secondary">Voltar</a>
+                            <a href="/teapp/permissoes" class="btn btn-outline-secondary">Voltar</a>
                         </div>
                     </form>
                 </div>

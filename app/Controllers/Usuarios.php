@@ -44,8 +44,8 @@ Class Usuarios {
 	public function AdicionarACT(){
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+			$id_grupo = $dadosForm['id_grupo'];
 			$model = new \App\Models\Usuarios();
-
 			if($model->cpf_existe($dadosForm['cpf'])) {
 				$_SESSION['doubleCPF'] = true;
 				header("Location: /teapp/usuarios/adicionar");

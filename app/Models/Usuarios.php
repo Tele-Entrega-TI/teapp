@@ -11,11 +11,9 @@ Class Usuarios extends DB {
 	}
 
 	public function index() {
-
-		$sql = "SELECT u.*, f.nome AS nome_funcionario, p.nome_permissao
+		$sql = "SELECT u.*, f.nome AS nome_funcionario
 				FROM usuarios u
 				LEFT JOIN cad_funcionarios f ON f.id_funcionario = u.id_funcionario
-				LEFT JOIN permissoes p ON p.id_permissao = u.id_permissao
 				WHERE u.ativo = 1
 				ORDER BY u.id_usuario DESC";
 
@@ -28,23 +26,60 @@ Class Usuarios extends DB {
 			return $obj;
 		} else {
 			return 0;
-		} 	
+		}
 	}
+
 
 	public function adicionar($dados) {
 	    $id_funcionario = $dados['id_funcionario'];
-	    $id_permissao = $dados['id_permissao'];
 	    $cpf = $dados['cpf'];
+	    $id_grupo = $dados['id_grupo'];
 
-	    $sql = "INSERT INTO usuarios (id_funcionario, cpf, senha, id_permissao)
+	    $sql = "INSERT INTO usuarios (id_funcionario, cpf, senha, id_grupo)
 	            VALUES (
 	                $id_funcionario,
 	                '" . $this->conn->real_escape_string($cpf) . "',
 	                NULL,
-	                $id_permissao
+	                $id_grupo
 	            )";
 
 	    return $this->conn->query($sql);
+	}
+
+	public function validarLogin($cpf, $senha) {
+
+	    $cpf = $this->conn->real_escape_string($cpf);
+	    $sql = "SELECT u.*, f.nome AS nome_funcionario
+	            FROM usuarios u
+	            LEFT JOIN cad_funcionarios f ON f.id_funcionario = u.id_funcionario
+	            WHERE u.cpf = '$cpf' AND u.senha = '$senha' AND u.ativo = 1
+	            LIMIT 1";
+
+	    $query = $this->conn->query($sql);
+
+	    if ($query && $query->num_rows > 0) {
+	        return $query->fetch_assoc();
+	    } else {
+	        return 0;
+	    }
+	}
+
+	public function getModulosUsuario($id_funcionario) {
+
+	    $sql = "SELECT nome_modulo 
+	            FROM modulos_acesso 
+	            WHERE id_funcionario = $id_funcionario AND id_grupo = 0";
+
+	    $query = $this->conn->query($sql);
+
+	    $lista = [];
+	    if ($query && $query->num_rows > 0) {
+	        while ($row = $query->fetch_assoc()) {
+	            $lista[] = $row['nome_modulo'];
+	        }
+	    }
+
+	    return $lista;
 	}
 
 
