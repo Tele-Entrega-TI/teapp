@@ -61,7 +61,10 @@
 
             <?php
             $itens = [
-              'pneus' => 'Pneus',
+              'pneu_dianteiro_direito' => 'Pneu Dianteiro Direito',
+              'pneu_dianteiro_esquerdo' => 'Pneu Dianteiro Esquerdo',
+              'pneu_traseiro_direito' => 'Pneu Traseiro Direito',
+              'pneu_traseiro_esquerdo' => 'Pneu Traseiro Esquerdo',
               'freios' => 'Freios',
               'oleo' => 'Nível do Óleo',
               'luzes' => 'Luzes',

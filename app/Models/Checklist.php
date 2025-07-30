@@ -45,9 +45,21 @@ class Checklist extends DB {
         $assinatura_motorista = $dados['assinatura_motorista'];
         $origem = $dados['origem'];
 
-        $pneus_qualidade = $dados['pneus_qualidade'];
-        $pneus_observacao = $dados['pneus_observacao'];
-        $pneus_foto = $dados['pneus_foto'];
+        $pneu_traseiro_esquerdo_qualidade = $dados['pneu_traseiro_esquerdo_qualidade'];
+        $pneu_traseiro_esquerdo_observacao = $dados['pneu_traseiro_esquerdo_observacao'];
+        $pneu_traseiro_esquerdo_foto = $dados['pneu_traseiro_esquerdo_foto'];
+
+        $pneu_traseiro_direito_qualidade = $dados['pneu_traseiro_direito_qualidade'];
+        $pneu_traseiro_direito_observacao = $dados['pneu_traseiro_direito_observacao'];
+        $pneu_traseiro_direito_foto = $dados['pneu_traseiro_direito_foto'];
+
+        $pneu_dianteiro_esquerdo_qualidade = $dados['pneu_dianteiro_esquerdo_qualidade'];
+        $pneu_dianteiro_esquerdo_observacao = $dados['pneu_dianteiro_esquerdo_observacao'];
+        $pneu_dianteiro_esquerdo_foto = $dados['pneu_dianteiro_esquerdo_foto'];
+
+        $pneu_dianteiro_direito_qualidade = $dados['pneu_dianteiro_direito_qualidade'];
+        $pneu_dianteiro_direito_observacao = $dados['pneu_dianteiro_direito_observacao'];
+        $pneu_dianteiro_direito_foto = $dados['pneu_dianteiro_direito_foto'];
 
         $freios_qualidade = $dados['freios_qualidade'];
         $freios_observacao = $dados['freios_observacao'];
@@ -75,22 +87,22 @@ class Checklist extends DB {
 
         $sql = "INSERT INTO veiculo_checklists (
                     id_veiculo, data_checklist, observacoes, assinatura_motorista,
-                    pneus_qualidade, pneus_observacao, pneus_foto,
+                    pneu_traseiro_esquerdo_qualidade, pneu_traseiro_esquerdo_observacao, pneu_traseiro_esquerdo_foto,
                     freios_qualidade, freios_observacao, freios_foto,
                     oleo_qualidade, oleo_observacao, oleo_foto,
                     luzes_qualidade, luzes_observacao, luzes_foto,
                     lataria_qualidade, lataria_observacao, lataria_foto,
                     nivel_agua_qualidade, nivel_agua_observacao, nivel_agua_foto,
-                    equipamentos_seguranca_qualidade, equipamentos_seguranca_observacao, equipamentos_seguranca_foto, origem 
+                    equipamentos_seguranca_qualidade, equipamentos_seguranca_observacao, equipamentos_seguranca_foto, origem, pneu_traseiro_direito_qualidade, pneu_traseiro_direito_observacao, pneu_traseiro_direito_foto, pneu_dianteiro_esquerdo_qualidade, pneu_dianteiro_esquerdo_observacao, pneu_dianteiro_esquerdo_foto, pneu_dianteiro_direito_qualidade, pneu_dianteiro_direito_observacao, pneu_dianteiro_direito_foto
                 ) VALUES (
                     '$id_veiculo', '$data_checklist', '$observacoes', '$assinatura_motorista',
-                    '$pneus_qualidade', '$pneus_observacao', '$pneus_foto',
+                    '$pneu_traseiro_esquerdo_qualidade', '$pneu_traseiro_esquerdo_observacao', '$pneu_traseiro_esquerdo_foto',
                     '$freios_qualidade', '$freios_observacao', '$freios_foto',
                     '$oleo_qualidade', '$oleo_observacao', '$oleo_foto',
                     '$luzes_qualidade', '$luzes_observacao', '$luzes_foto',
                     '$lataria_qualidade', '$lataria_observacao', '$lataria_foto',
                     '$nivel_agua_qualidade', '$nivel_agua_observacao', '$nivel_agua_foto',
-                    '$equipamentos_seguranca_qualidade', '$equipamentos_seguranca_observacao', '$equipamentos_seguranca_foto', '$origem'
+                    '$equipamentos_seguranca_qualidade', '$equipamentos_seguranca_observacao', '$equipamentos_seguranca_foto', '$origem', '$pneu_traseiro_direito_qualidade', '$pneu_traseiro_direito_observacao', '$pneu_traseiro_direito_foto', '$pneu_dianteiro_esquerdo_qualidade', '$pneu_dianteiro_esquerdo_observacao', '$pneu_dianteiro_esquerdo_foto', '$pneu_dianteiro_direito_qualidade', '$pneu_dianteiro_direito_observacao', '$pneu_dianteiro_direito_foto'
                 )";
 
         if ($this->conn->query($sql)) {

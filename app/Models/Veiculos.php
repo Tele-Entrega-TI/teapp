@@ -25,7 +25,10 @@ class Veiculos extends DB {
                         SELECT 
                             CASE 
                                 WHEN 
-                                    c.pneus_qualidade = 'ruim' OR
+                                    c.pneu_traseiro_esquerdo_qualidade = 'ruim' OR
+                                    c.pneu_traseiro_direito_qualidade = 'ruim' OR
+                                    c.pneu_dianteiro_esquerdo_qualidade = 'ruim' OR
+                                    c.pneu_dianteiro_direito_qualidade = 'ruim' OR
                                     c.freios_qualidade = 'ruim' OR
                                     c.oleo_qualidade = 'ruim' OR
                                     c.luzes_qualidade = 'ruim' OR
