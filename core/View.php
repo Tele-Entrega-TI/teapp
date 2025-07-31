@@ -78,9 +78,39 @@ class View
             </script>";
         }
 
+        if (isset($_SESSION['permEdit'])) {
+            if($_SESSION['permEdit'] === true) {
+                $this->alert= "<script type= 'text/javascript'>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Acesso Negado',
+                        text: 'Você não tem permissão para acessar esta funcionalidade.',
+                        footer: 'Consulte o administrador do sistema para mais informações.',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Entendi'
+                    });
+                </script>";
+            }
+        }
 
-        $this->view = $view;
-    }
+        if(isset($_SESSION['permDelete'])) {
+            if ($_SESSION['permDelete'] === true) {
+                $this->alert= "<script type= 'text/javascript'>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Acesso Negado',
+                        text: 'Voce não tem permissão para acessar esta funcionalidade.',
+                        footer: 'Consulte o administrador do sistema para mais informações.',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Entendi'
+                    });
+                </script>"; 
+            }
+        } 
+
+        $this->view = $view;    
+    } 
+
 
     public function load(){
         
@@ -116,6 +146,8 @@ class View
             unset($_SESSION['dbUpdate']);
             unset($_SESSION['dbDelete']);
             unset($_SESSION['doubleCPF']);
+            unset($_SESSION['permEdit']);
+            unset($_SESSION['permDelete']); 
             unset($this->alert);
         }
     }

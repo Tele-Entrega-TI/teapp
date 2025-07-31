@@ -6,7 +6,30 @@ class Movimentacao {
 
     private array $dados;
 
-    public function __construct() {}
+    public function __construct() {
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
+        }
+
+        $modulo_id = 6;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
+    }
 
     public function Index() {
         $model = new \App\Models\Movimentacao();
@@ -21,6 +44,13 @@ class Movimentacao {
 
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Movimentacao();
 
         $this->dados['veiculos'] = $model->listar_veiculos();
@@ -44,6 +74,13 @@ class Movimentacao {
     }
 
     public function Finalizar($id_veiculo) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Movimentacao();
         $ret = $model->finalizar($id_veiculo);
 

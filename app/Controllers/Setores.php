@@ -7,12 +7,28 @@ class Setores {
     private array $dadosAux;
 
     public function __construct() {
-        // Filtro para determinar se o usuário está logado
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
         }
-        */
+
+        $modulo_id = 6;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index() {
@@ -31,6 +47,13 @@ class Setores {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $view = new \Core\View("setores/adicionar");
         $view->load();
     }
@@ -54,6 +77,13 @@ class Setores {
     }
 
     public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Setores();
         $ret = $model->buscar($id);
 
@@ -88,6 +118,13 @@ class Setores {
     }
 
     public function Excluir($id) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Setores();
         $ret = $model->excluir($id);
 

@@ -6,12 +6,28 @@ class Substitutos {
     private array $dados;
 
     public function __construct() {
-        // Filtro de login (opcional)
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
         }
-        */
+
+        $modulo_id = 6;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index() {
@@ -27,6 +43,13 @@ class Substitutos {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Substitutos();
 
         $this->dados['funcionarios'] = $model->listar_funcionarios();
@@ -50,6 +73,13 @@ class Substitutos {
     }
 
     public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Substitutos();
         $ret = $model->buscar($id);
 
@@ -83,6 +113,13 @@ class Substitutos {
     }
 
     public function Excluir($id) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Substitutos();
         $ret = $model->excluir($id);
 

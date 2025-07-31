@@ -8,14 +8,28 @@ class Checklist
     private array $dados;
     private array $dadosAux;
 
-    public function __construct()
-    {
-        // Filtro para determinar se o usuário está logado
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+    public function __construct() {
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
         }
-        */
+
+        $modulo_id = 5;
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index()
@@ -35,8 +49,13 @@ class Checklist
     }
 
 
-    public function Adicionar()
-    {
+    public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
 
         $modelVeiculos = new \App\Models\Veiculos();
         $veiculos = $modelVeiculos->index();
@@ -50,8 +69,7 @@ class Checklist
 
 
 
-    public function AdicionarACT()
-    {
+    public function AdicionarACT() {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -200,8 +218,7 @@ class Checklist
         }
     }
 
-    public function Visualizar($id)
-    {
+    public function Visualizar($id) {
         $model = new \App\Models\Checklist();
         $checklist = $model->buscar_por_id($id);
 
@@ -217,8 +234,7 @@ class Checklist
         }
     }
 
-    public function Ver($id)
-    {
+    public function Ver($id) {
         $model = new \App\Models\Checklist();
         $ret = $model->buscar_por_id($id);
 

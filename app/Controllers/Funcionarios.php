@@ -7,13 +7,30 @@ class Funcionarios {
     private array $dadosAux;
 
     public function __construct() {
-        // Filtro para determinar se o usuário está logado
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
         }
-        */
+
+        $modulo_id = 14;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
+
 
     public function Index() {
         $model = new \App\Models\Funcionarios();
@@ -31,6 +48,13 @@ class Funcionarios {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
         $view = new \Core\View("funcionarios/adicionar");
         $view->load();
     }
@@ -68,10 +92,17 @@ class Funcionarios {
 
 
     public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
         $model = new \App\Models\Funcionarios();
         $ret = $model->buscar($id);
 
-            if ($ret != 0) {
+            if ($ret <> 0) {
             $this->dados = $ret;
 
             $view = new \Core\View("funcionarios/editar");

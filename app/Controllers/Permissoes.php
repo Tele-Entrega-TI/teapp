@@ -7,7 +7,28 @@ class Permissoes {
     private array $dados;
 
     public function __construct() {
-        // validação de login se quiser
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
+        }
+
+        $modulo_id = 6;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index() {
@@ -27,20 +48,29 @@ class Permissoes {
 
 
     public function Editar($id_funcionario) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $modelModulos = new \App\Models\Modulos();
-        $modelAcesso = new \App\Models\ModulosAcesso();
+        $modelAcesso  = new \App\Models\ModulosAcesso();
 
-        $modulos = $modelModulos->index();
-        $acessos = $modelAcesso->listar_por_funcionario($id_funcionario);
+        $modulos  = $modelModulos->index();
+        $acessos  = $modelAcesso->listar_por_funcionario($id_funcionario);
 
-        $this->dados['modulos'] = $modulos;
-        $this->dados['acessos'] = $acessos;
+        $this->dados['modulos']        = $modulos;
+        $this->dados['acessos']        = $acessos;
         $this->dados['id_funcionario'] = $id_funcionario;
 
         $view = new \Core\View("permissoes/editar");
         $view->setDados($this->dados);
         $view->load();
     }
+
+
 
     public function EditarACT() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

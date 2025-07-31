@@ -7,8 +7,29 @@ class Intercorrencias
 
     private array $dados;
 
-    public function __construct()
-    {
+    public function __construct() {
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
+        }
+
+        $modulo_id = 22;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index()
@@ -24,8 +45,14 @@ class Intercorrencias
         $view->load();
     }
 
-    public function Adicionar()
-    {
+    public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $modelFuncionarios = new \App\Models\Funcionarios();
         $modelMotivos = new \App\Models\Motivos();
         $this->dados['funcionarios'] = $modelFuncionarios->listar_ativos();
@@ -51,9 +78,14 @@ class Intercorrencias
         }
     }
 
-    // Método para abrir o formulário de edição via GET
-    public function Editar($id)
-    {
+    public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $modelFuncionarios = new \App\Models\Funcionarios();
         $modelMotivos = new \App\Models\Motivos();
         $this->dados['funcionarios'] = $modelFuncionarios->listar_ativos();
@@ -72,8 +104,7 @@ class Intercorrencias
         }
     }
 
-    public function EditarACT()
-    {
+    public function EditarACT() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
             $model = new \App\Models\Intercorrencias();
@@ -88,8 +119,14 @@ class Intercorrencias
         }
     }
 
-    public function Excluir($id = null)
-    {
+    public function Excluir($id = null) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         if (empty($id)) {
             header("Location: /teapp/Intercorrencias");
             exit;

@@ -1,7 +1,14 @@
 <?php
-$modulos = $this->dados['modulos'];
-$acessos = $this->dados['acessos'];
+$modulos        = $this->dados['modulos'];
+$acessos        = $this->dados['acessos'];
 $id_funcionario = $this->dados['id_funcionario'];
+
+$niveis = [
+    'v'   => 'Visualizar',
+    've'  => 'Visualizar e Editar',
+    'ved' => 'Acesso Total',
+    ''    => 'Sem acesso'
+];
 ?>
 
 <div class="dashboard-main-body">
@@ -31,40 +38,34 @@ $id_funcionario = $this->dados['id_funcionario'];
                         <input type="hidden" name="id_funcionario" value="<?= $id_funcionario ?>">
 
                         <?php foreach ($modulos as $modulo): 
-                            $nivel = $acessos[$modulo['id_modulo']] ?? ''; // 'v', 've' ou 'ved'
+                            $id_modulo = (int)$modulo['id_modulo'];
+                            $nome      = strtolower($modulo['nome_modulo']);
+                            $nivel     = '';
+
+                            foreach($acessos as $a) {
+                                if((int)$a['id_modulo'] === $id_modulo) {
+                                    $nivel = $a['permissao'];
+                                }
+                            }
+
                         ?>
-                        <div class="mb-4">
-                            <h6 class="mb-2 text-capitalize"><?= strtolower($modulo['nome_modulo']) ?></h6>
+                            <div class="mb-4">
+                                <h6 class="mb-2 text-capitalize"><?= $nome ?></h6>
 
-                            <?php
-                            $niveis = [
-                                'v' => 'Visualizar',
-                                've' => 'Visualizar / Editar',
-                                'ved' => 'Visualizar / Editar / Deletar',
-                            ];
-                            ?>
-
-                            <?php foreach ($niveis as $valor => $label): ?>
-                                <div class="form-check mb-1">
-                                    <input class="form-check-input"
-                                           type="radio"
-                                           name="permissoes[<?= $modulo['id_modulo'] ?>]"
-                                           value="<?= $valor ?>"
-                                           <?= ($nivel === $valor ? 'checked' : '') ?>>
-                                    <label class="form-check-label"><?= $label ?></label>
-                                </div>
-                            <?php endforeach; ?>
-
-                            <div class="form-check mt-1">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="permissoes[<?= $modulo['id_modulo'] ?>]"
-                                       value=""
-                                       <?= ($nivel === '' ? 'checked' : '') ?>>
-                                <label class="form-check-label text-muted">Sem acesso</label>
+                                <?php foreach ($niveis as $valor => $label): ?>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input"
+                                               type="radio"
+                                               name="permissoes[<?= $id_modulo ?>]"
+                                               value="<?= $valor ?>"
+                                               <?= ($nivel === $valor ? 'checked' : '') ?>>
+                                        <label class="form-check-label <?= $valor === '' ? 'text-muted' : '' ?>">
+                                            <?= $label ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
-                        </div>
-                        <hr>
+                            <hr>
                         <?php endforeach; ?>
 
                         <div class="text-end">

@@ -6,11 +6,28 @@ class Modulos {
     private array $dados;
 
     public function __construct() {
-        // Validação de login se necessário
-        // if (!isset($_SESSION['auth_Login'])) {
-        //     header("Location: /teapp/auth");
-        //     exit;
-        // }
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
+        }
+
+        $modulo_id = 23;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index() {
@@ -30,6 +47,13 @@ class Modulos {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $view = new \Core\View("modulos/adicionar");
         $view->load();
     }
@@ -70,6 +94,13 @@ class Modulos {
 
 
     public function Excluir($id) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Modulos();
         $ret = $model->excluir($id);
 

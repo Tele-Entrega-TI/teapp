@@ -7,12 +7,28 @@ class Orcamento {
     private array $dadosAux;
 
     public function __construct() {
-        // Filtro de login (opcional)
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
         }
-        */
+
+        $modulo_id = 6;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index() {
@@ -31,6 +47,13 @@ class Orcamento {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $modelOficinas = new \App\Models\Oficinas();
         $modelVeiculos = new \App\Models\Veiculos();
 
@@ -62,6 +85,13 @@ class Orcamento {
     }
 
     public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Orcamento();
         $ret = $model->buscar($id);
 
@@ -106,6 +136,13 @@ class Orcamento {
     }
 
     public function Excluir($id) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Orcamento();
         $ret = $model->excluir($id);
 

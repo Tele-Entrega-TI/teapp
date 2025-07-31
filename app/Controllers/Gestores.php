@@ -7,13 +7,30 @@ class Gestores {
     private array $dadosAux;
 
     public function __construct() {
-        // Filtro de login (opcional)
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+        
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
         }
-        */
+
+        $modulo_id = 16;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
+    
 
     public function Index() {
         $model = new \App\Models\Gestores();
@@ -31,6 +48,13 @@ class Gestores {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $view = new \Core\View("gestores/adicionar");
         $view->setDados([]);
         $view->load();
@@ -55,6 +79,13 @@ class Gestores {
     }
 
     public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Gestores();
         $ret = $model->buscar($id);
 
@@ -69,6 +100,13 @@ class Gestores {
     }
 
     public function EditarACT() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_gestor'])) {
             $model = new \App\Models\Gestores();
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -90,6 +128,13 @@ class Gestores {
     }
 
     public function Excluir($id) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Gestores();
         $ret = $model->excluir($id);
 

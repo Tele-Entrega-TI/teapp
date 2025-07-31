@@ -6,7 +6,30 @@ class Empresas {
 
     private array $dados;
 
-    public function __construct() {}
+    public function __construct() {
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
+        }
+
+        $modulo_id = 20;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
+    }
 
     public function Index() {
         $model = new \App\Models\Empresas();
@@ -21,6 +44,13 @@ class Empresas {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
         $view = new \Core\View("empresas/adicionar");
         $view->setDados([]);
         $view->load();
@@ -38,8 +68,14 @@ class Empresas {
         }
     }
 
-    // Método para abrir o formulário de edição via GET
     public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
         $model = new \App\Models\Empresas();
         $ret = $model->buscar($id);
 
@@ -66,6 +102,13 @@ class Empresas {
     }
 
     public function Excluir($id = null) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
         if (empty($id)) {
             header("Location: /teapp/empresas");
             exit;

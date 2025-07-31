@@ -7,13 +7,32 @@ class DadosProfissionais {
     private array $dadosAux;
 
     public function __construct() {
-        // Filtro para determinar se o usuário está logado
-        /*
-        if (!isset($_SESSION['auth_Login']) == true) {
-            // header("Location: ./auth");
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
         }
-        */
+
+        $modulo_id = 6;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
+
     }
+            
+    
 
     public function Index() {
         $model = new \App\Models\DadosProfissionais();
@@ -31,6 +50,13 @@ class DadosProfissionais {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
         $modelFuncionarios = new \App\Models\Funcionarios();
         $modelCargos = new \App\Models\Cargos();
         $modelSetores = new \App\Models\Setores();
@@ -68,6 +94,13 @@ class DadosProfissionais {
     }
 
     public function Editar($id) {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
         $modelDadosProfissionais = new \App\Models\DadosProfissionais();
         $ret = $modelDadosProfissionais->buscar($id);
 
@@ -116,10 +149,16 @@ class DadosProfissionais {
     }
 
     public function Excluir($id) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
         $model = new \App\Models\DadosProfissionais();
         $ret = $model->excluir($id);
 
-        if ($ret != 0) {
+        if ($ret <> 0) {
             $_SESSION['dbDelete'] = true;
             header("Location: /teapp/dadosprofissionais");
         } else {

@@ -8,10 +8,28 @@ class Manutencao {
     private array $dadosAux;
 
     public function __construct() {
-        // Filtro de login opcional
-        // if (!isset($_SESSION['auth_Login'])) {
-        //     header("Location: ./auth");
-        // }
+
+        if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
+        }
+
+        $modulo_id = 10;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
     }
 
     public function Index() {
@@ -27,6 +45,13 @@ class Manutencao {
     }
 
     public function Adicionar() {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $modelOrcamento = new \App\Models\Orcamento();
         $modelGestores  = new \App\Models\Gestores();
 
@@ -63,6 +88,13 @@ class Manutencao {
     }
 
     public function Excluir($id) {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
         $model = new \App\Models\Manutencao();
         $ret = $model->excluir($id);
 
