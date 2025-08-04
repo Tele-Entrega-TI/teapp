@@ -119,7 +119,7 @@ class DadosProfissionais extends DB {
                     f.apelido AS nome 
                 FROM dados_profissionais dp
                 LEFT JOIN cad_funcionarios f ON dp.id_funcionario = f.id_funcionario
-                WHERE dp.cargo IN ('Motorista', 'Motoboy') AND dp.ativo = 1
+                WHERE dp.id_cargo IN ('Motorista', 'Motoboy') AND dp.ativo = 1
                 ORDER BY f.apelido";
 
         $res = $this->conn->query($sql);
