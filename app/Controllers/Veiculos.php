@@ -36,6 +36,8 @@ class Veiculos {
     public function Index() {
         $lstVeiculos = new \App\Models\Veiculos();
         $ret = $lstVeiculos->index();
+        
+
 
         $view = new \Core\View("veiculos/index");
 
@@ -54,7 +56,6 @@ class Veiculos {
             header("Location: /teapp/veiculos");
             exit;
         }
-
 
         $modelProfissionais = new \App\Models\DadosProfissionais();
         $this->dados['motoristas'] = $modelProfissionais->listar_motoristas();

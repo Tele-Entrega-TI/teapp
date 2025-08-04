@@ -74,34 +74,40 @@
           </li>
         </ul>
       </li>
-      <li class="sidebar-menu-group-title">Operacional</li>
-      
-      <li class="dropdown">
+           <li class="dropdown">
         <a href="javascript:void(0)">
-          <iconify-icon icon="solar:document-text-outline" class="menu-icon"></iconify-icon>
-          <span>Lançamentos</span> 
+          <iconify-icon icon="solar:clipboard-text-outline" class="menu-icon"></iconify-icon>
+          <span>Operacional</span>   
         </a>
         <ul class="sidebar-submenu">
-          <li>
-            <a href="invoice-list.html"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Substituições</a>
-          </li>
-          
-          <li>
-            <a href="./intercorrencias"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Intercorrencias</a>
-          </li>
+
+          <li><a href="/teapp/veiculos"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>Veículos</a></li>
+          <li><a href="/teapp/checklist"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Checklists</a></li>
+          <li><a href="/teapp/movimentacao"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Movimentação</a></li>
+          <li><a href="/teapp/manutencao"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Manutenção</a></li>
+
+          <li><a href="/teapp/substitutos"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Substituições</a></li>
+          <li><a href="/teapp/gestores"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Gestores</a></li>
+          <li><a href="/teapp/orcamento"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Orçamentos</a></li>
+          <li><a href="/teapp/itens"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Itens de Orçamento</a></li>
+          <li><a href="/teapp/oficinas"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Oficinas</a></li>
+          <li><a href="/teapp/locacoes"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Locações</a></li>
         </ul>
       </li>
-      <li>
-        <a href="chat-message.html">
-          <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
-          <span>Mensagens Enviadas</span> 
+      <li class="dropdown">
+        <a href="javascript:void(0)">
+          <iconify-icon icon="mdi:account-badge-outline" class="menu-icon"></iconify-icon>
+          <span>Recursos Humanos</span> 
         </a>
-      </li>
-      <li>
-        <a href="calendar-main.html">
-          <iconify-icon icon="solar:calendar-outline" class="menu-icon"></iconify-icon>
-          <span>Locações</span> 
-        </a>
+        <ul class="sidebar-submenu">
+
+          <li><a href="/teapp/funcionarios"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>Funcionarios</a></li>
+          <li><a href="/teapp/cargos"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Cargos</a></li>
+          <li><a href="/teapp/setores"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i>Setores</a></li>
+          <li><a href="/teapp/empresas"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Empresas</a></li>
+
+          <li><a href="/teapp/dadosprofissionais"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Dados Profissionais</a></li>
+        </ul>
       </li>
       <li class="dropdown">
         <a href="javascript:void(0)">
@@ -120,6 +126,7 @@
           </li>
         </ul>
       </li>
+
       <li class="dropdown">
         <a href="javascript:void(0)">
           <iconify-icon icon="solar:lock-password-broken" class="menu-icon"></iconify-icon>
@@ -213,7 +220,7 @@
           <div class="dropdown-menu to-top dropdown-menu-sm">
             <div class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
               <div>
-                <h6 class="text-lg text-primary-light fw-semibold mb-2">$usuário</h6>
+                <h6 class="text-lg text-primary-light fw-semibold mb-2"><?php echo $_SESSION['nome_user']?></h6>
                 <span class="text-secondary-light fw-medium text-sm">Administrador</span>
               </div>
               <button type="button" class="hover-text-danger">
