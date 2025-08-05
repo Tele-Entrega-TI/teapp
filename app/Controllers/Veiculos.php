@@ -34,20 +34,28 @@ class Veiculos {
 
 
     public function Index() {
-        $lstVeiculos = new \App\Models\Veiculos();
-        $ret = $lstVeiculos->index();
         
+    $model = new \App\Models\Veiculos();
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $filtros = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $ret = $model->filtrar($filtros);
+    } else {
+        $ret = $model->index();
+    }
 
+    if ($ret <> false) {
+        $this->dados = $ret;
         $view = new \Core\View("veiculos/index");
-
-        if ($ret <> false) {
-            $this->dados = $ret;
-            $view->setDados($this->dados);
-        }
-
+        $view->setDados($this->dados);
+        $view->load();
+    } else {
+        $view = new \Core\View("veiculos/index");
         $view->load();
     }
+}
+
+
 
     public function Adicionar() {
 

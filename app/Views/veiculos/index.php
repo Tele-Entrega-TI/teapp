@@ -1,12 +1,10 @@
-
-
 <div class="dashboard-main-body">
 
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
         <h6 class="fw-semibold mb-0">Veículos</h6>
         <ul class="d-flex align-items-center gap-2">
             <li class="fw-medium">
-                <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
+                <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
                     Dashboard
                 </a>
@@ -19,14 +17,34 @@
     <div class="row gy-4">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-lg-9"></div>
-                        <div class="col-lg-3 text-end">
-                            <a href="/teapp/veiculos/adicionar" class="btn btn-primary text-end">Adicionar</a>
+
+                <!-- Header apenas com o filtro -->
+                <div class="card-header d-flex align-items-center flex-wrap gap-2">
+                    <form method="post" class="d-flex flex-wrap align-items-center gap-2">
+                        <input type="text" name="placa" class="form-control form-control-sm" placeholder="Placa"
+                               value="<?php echo isset($_POST['placa']) ? htmlspecialchars($_POST['placa']) : ''; ?>">
+
+                        <input type="text" name="modelo" class="form-control form-control-sm" placeholder="Modelo"
+                               value="<?php echo isset($_POST['modelo']) ? htmlspecialchars($_POST['modelo']) : ''; ?>">
+
+                        <div class="form-check form-switch d-flex align-items-center ms-1">
+                            <input class="form-check-input" type="checkbox" id="f-ativos" name="ativo" value="1"
+                                   <?php echo (isset($_POST['ativo']) && $_POST['ativo'] == '1') ? 'checked' : ''; ?>>
+                            <label class="form-check-label ms-2" for="f-ativos">Somente ativos</label>
                         </div>
-                    </div>
+
+                        <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" style="width:32px; height:32px; padding:0;">
+                        <iconify-icon icon="solar:magnifer-linear" style="font-size:18px;"></iconify-icon>
+                        </button>
+                    </form>
+
+                    <a href="/teapp/veiculos/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1">
+                    <iconify-icon icon="ph:plus-circle" style="font-size: 18px;"></iconify-icon>
+                    Adicionar
+                    </a>
                 </div>
+                <!-- Fim header -->
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table vertical-striped-table mb-0">
@@ -38,6 +56,7 @@
                                     <th class="text-center">Cor</th>
                                     <th class="text-center">Funcionário</th>
                                     <th class="text-center">Ano</th>
+                                    <th class="text-center">Vencimento do Doc.</th>
                                     <th class="text-center">Último Checklist</th>
                                     <th class="text-center">Ativo</th>
                                     <th class="text-center">Ações</th>
@@ -60,10 +79,18 @@
                                         echo '<td class="text-center">' . $key['cor'] . '</td>';
 
                                         echo '<td class="text-center">';
-                                        echo !empty($key['titular_veiculo']) ? $key['titular_veiculo'] : '<span class="text-muted">—</span>';
+                                        echo !empty($key['nome_funcionario']) ? $key['nome_funcionario'] : '<span class="text-muted">—</span>';
                                         echo '</td>';
 
                                         echo '<td class="text-center">' . $key['ano_fab'] . '</td>';
+
+                                        echo '<td class="text-center">';
+
+                                        echo '<span class="badge text-sm fw-semibold text-info-600 bg-info-100 px-20 py-9 radius-4 text-white">'
+                                                . date('d/m/Y', strtotime($key['vencimento_doc'])) .
+                                                '</span>'; 
+
+                                        '</td>';
 
                                         echo '<td class="text-center">';
                                         if (!empty($key['data_ultimo_checklist'])) {
@@ -83,10 +110,11 @@
                                         echo '</td>';
 
                                         echo '<td class="text-center">
-                                            <a href="/teapp/veiculos/editar/' . $key['id_veiculo'] . '" class="btn btn-sm btn-secondary p-3 me-1">
+
+                                            <a href="/teapp/veiculos/editar/' . $key['id_veiculo'] . '" class="btn btn-sm btn-secondary p-3 me-1" title="Editar">
                                                 <iconify-icon icon="solar:pen-new-round-line-duotone" class="icon text-md"></iconify-icon>
                                             </a>
-                                            <a href="/teapp/veiculos/excluir/' . $key['id_veiculo'] . '" class="btn btn-sm btn-outline-secondary p-3" onclick="return confirm(\'Tem certeza que deseja desativar?\')">
+                                            <a href="/teapp/veiculos/excluir/' . $key['id_veiculo'] . '" class="btn btn-sm btn-outline-secondary p-3" onclick="return confirm(\'Tem certeza que deseja desativar?\')" title="Excluir">
                                                 <iconify-icon icon="solar:trash-bin-minimalistic-line-duotone" class="icon text-md"></iconify-icon>
                                             </a>
                                         </td>';
@@ -101,6 +129,7 @@
                         </table>
                     </div>
                 </div>
+
             </div><!-- card end -->
         </div>
     </div>

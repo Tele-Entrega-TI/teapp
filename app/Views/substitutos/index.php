@@ -49,7 +49,7 @@
                                         echo '<td class="text-center">' . (!empty($key['nome_locacao']) ? $key['nome_locacao'] : '<span class="text-muted">—</span>') . '</td>';
 
                                         echo '<td class="text-center">';
-                                        if (!empty($key['data']) && $key['data'] !== '0000-00-00') {
+                                        if (!empty($key['data']) && $key['data'] <> '0000-00-00') {
                                             echo '<span class="badge text-sm fw-semibold text-info-600 bg-info-100 px-20 py-9 radius-4 text-white">'
                                                 . date('d/m/Y', strtotime($key['data'])) .
                                                 '</span>';

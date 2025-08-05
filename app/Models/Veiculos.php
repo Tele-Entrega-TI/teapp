@@ -131,6 +131,43 @@ class Veiculos extends DB {
         }
     }
 
+    public function filtrar($filtros) {
+
+        $sql = "SELECT * FROM cad_veiculos WHERE 1 = 1";
+
+        if (!empty($filtros['placa'])) {
+            $placa = $this->conn->real_escape_string($filtros['placa']);
+            $sql .= " AND placa LIKE '%{$placa}%'";
+        }
+
+        if (!empty($filtros['modelo'])) {
+            $modelo = $this->conn->real_escape_string($filtros['modelo']);
+            $sql .= " AND modelo LIKE '%{$modelo}%'";
+        }
+
+        if (isset($filtros['ativo']) && $filtros['ativo'] !== '') {
+            $ativo = (int)$filtros['ativo'];
+            $sql .= " AND ativo = {$ativo}";
+        }
+
+        $sql .= " ORDER BY id_veiculo DESC";
+
+        $ret = $this->conn->query($sql);
+
+        if ($ret && $ret->num_rows > 0) {
+            while ($row = $ret->fetch_assoc()) {
+                $obj[] = $row;
+            }
+            return $obj;
+        }
+
+        return 0;
+    }
+
+
+
+
+
     public function excluir($idExcluir) {
         $sql = "UPDATE cad_veiculos SET ativo='0' WHERE id_veiculo = $idExcluir";
 
