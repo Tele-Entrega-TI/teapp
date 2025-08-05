@@ -4,9 +4,9 @@
     <h6 class="fw-semibold mb-0">Checklists de Veículos</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
-        <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
+        <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-          Dashboard
+          Início
         </a>
       </li>
       <li>-</li>
@@ -30,9 +30,9 @@
                         <table class="table vertical-striped-table mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Motorista</th>
-                                    <th class="text-center">Número do veículo</th>
-                                    <th class="text-center">Observação</th>
+                                    <th class="text-center">Condutor</th>
+                                    <th class="text-center">Placa do veículo</th>
+                                    <th class="text-center">Tipo</th>
                                     <th class="text-center">Data do checklist</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
@@ -43,9 +43,9 @@
                                     foreach ($this->dados['checklists'] as $key) {
                                         echo '<tr>';
                                         echo '<td class="text-center">' . $key['assinatura_motorista'] . '</td>';
-                                        echo '<td class="text-center">' . $key['id_veiculo'] . '</td>';
-                                        echo '<td class="text-center">' . $key['observacoes'] . '</td>';
-                                        echo '<td class="text-center">' . $key['data_checklist'] . '</td>';
+                                        echo '<td class="text-center">' . $key['placa'] . '</td>';
+                                        echo '<td class="text-center">' . $key['tipo'] . '</td>';
+                                        echo '<td class="text-center">' . date("d-m-y",strtotime($key['data_checklist'])) . '</td>';
                                         echo '<td class="text-center">
                                                 <a href="/teapp/checklist/ver/' . $key['id_checklist'] . '" class="btn btn-sm btn-info me-2">Detalhar</a>
                                                 <a href="/teapp/checklist/excluir/' . $key['id_checklist'] . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Tem certeza que deseja excluir?\')">Excluir</a>

@@ -3,9 +3,9 @@
     <h6 class="fw-semibold mb-0">Detalhes do Checklist</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
-        <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
+        <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-          Dashboard
+          Início
         </a>
       </li>
       <li>-</li>
@@ -56,7 +56,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Pneu Traseiro Esquerdo</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['pneu_traseiro_esquerdo_foto']; ?>" alt="Foto do pneu">
+                      <img src="/teapp/uploads/checklists/<?= $f['pneu_traseiro_esquerdo_foto']; ?>" alt="Foto do pneu" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['pneu_traseiro_esquerdo_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['pneu_traseiro_esquerdo_observacao']; ?></div>
@@ -65,7 +65,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Pneu Traseiro Direito</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['pneu_traseiro_direito_foto']; ?>" alt="Foto do pneu">
+                      <img src="/teapp/uploads/checklists/<?= $f['pneu_traseiro_direito_foto']; ?>" alt="Foto do pneu" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['pneu_traseiro_direito_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['pneu_traseiro_direito_observacao']; ?></div>
@@ -76,7 +76,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Pneu Dianteiro Esquerdo</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['pneu_dianteiro_esquerdo_foto']; ?>" alt="Foto do pneu">
+                      <img src="/teapp/uploads/checklists/<?= $f['pneu_dianteiro_esquerdo_foto']; ?>" alt="Foto do pneu" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['pneu_dianteiro_esquerdo_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['pneu_dianteiro_esquerdo_observacao']; ?></div>
@@ -85,7 +85,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Pneu Dianteiro Direito</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['pneu_dianteiro_direito_foto']; ?>" alt="Foto do pneu">
+                      <img src="/teapp/uploads/checklists/<?= $f['pneu_dianteiro_direito_foto']; ?>" alt="Foto do pneu" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['pneu_dianteiro_direito_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['pneu_dianteiro_direito_observacao']; ?></div>
@@ -98,7 +98,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Freios</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['freios_foto']; ?>" alt="Foto freio">
+                      <img src="/teapp/uploads/checklists/<?= $f['freios_foto']; ?>" alt="Foto freio" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['freios_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['freios_observacao']; ?></div>
@@ -111,7 +111,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Nivel de Óleo</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['oleo_foto']; ?>" alt="Foto freio">
+                      <img src="/teapp/uploads/checklists/<?= $f['oleo_foto']; ?>" alt="Foto freio" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['oleo_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['oleo_observacao']; ?></div>
@@ -124,7 +124,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Luzes</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['luzes_foto']; ?>" alt="Foto freio">
+                      <img src="/teapp/uploads/checklists/<?= $f['luzes_foto']; ?>" alt="Foto freio" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['luzes_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['luzes_observacao']; ?></div>
@@ -137,7 +137,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Lataria</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['lataria_foto']; ?>" alt="Foto freio">
+                      <img src="/teapp/uploads/checklists/<?= $f['lataria_foto']; ?>" alt="Foto freio" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['lataria_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['lataria_observacao']; ?></div>
@@ -150,7 +150,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Nível de Água</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['nivel_agua_foto']; ?>" alt="Foto freio">
+                      <img src="/teapp/uploads/checklists/<?= $f['nivel_agua_foto']; ?>" alt="Foto freio" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['nivel_agua_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['nivel_agua_observacao']; ?></div>
@@ -163,7 +163,7 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Equipamentos de Segurança</h6>
                     <div>
                       <strong>Foto:</strong>
-                      <img src="/teapp/uploads/checklists/<?= $f['equipamentos_seguranca_foto']; ?>" alt="Foto freio">
+                      <img src="/teapp/uploads/checklists/<?= $f['equipamentos_seguranca_foto']; ?>" alt="Foto freio" style="width: 500px; height: 350px;">
                     </div>
                     <div><strong>Qualidade:</strong> <?= $f['equipamentos_seguranca_qualidade']; ?></div>
                     <div><strong>Observação:</strong> <?= $f['equipamentos_seguranca_observacao']; ?></div>

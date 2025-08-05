@@ -8,7 +8,8 @@ class Checklist
     private array $dados;
     private array $dadosAux;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         if (!isset($_SESSION['id_user'])) {
             header("Location: /teapp/login");
@@ -28,8 +29,8 @@ class Checklist
             exit;
         }
 
-        $this->podeEditar  = str_contains($this->acesso, 'e'); 
-        $this->podeExcluir = str_contains($this->acesso, 'd'); 
+        $this->podeEditar = str_contains($this->acesso, 'e');
+        $this->podeExcluir = str_contains($this->acesso, 'd');
     }
 
     public function Index()
@@ -48,8 +49,8 @@ class Checklist
         $view->load();
     }
 
-
-    public function Adicionar() {
+    public function Adicionar()
+    {
 
         if (!$this->podeEditar) {
             $_SESSION['permEdit'] = true;
@@ -67,9 +68,8 @@ class Checklist
         $view->load();
     }
 
-
-
-    public function AdicionarACT() {
+    public function AdicionarACT()
+    {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -140,9 +140,6 @@ class Checklist
             exit;
         }
     }
-
-
-
 
     public function Preencher()
     {
@@ -218,7 +215,8 @@ class Checklist
         }
     }
 
-    public function Visualizar($id) {
+    public function Visualizar($id)
+    {
         $model = new \App\Models\Checklist();
         $checklist = $model->buscar_por_id($id);
 
@@ -234,9 +232,10 @@ class Checklist
         }
     }
 
-    public function Ver($id) {
+    public function Ver($id)
+    {
         $model = new \App\Models\Checklist();
-        $ret = $model->buscar_por_id($id);
+        $ret = $model->buscar_checklist($id);
 
         $view = new \Core\View("checklist/ver");
         if ($ret) {
@@ -244,6 +243,110 @@ class Checklist
             $view->setDados($this->dados);
         }
         $view->load();
+    }
+
+    public function Excluir($id = null)
+    {
+
+        if (!$this->podeExcluir) {
+            $_SESSION['permDelete'] = true;
+            header("Location: /teapp/operacional");
+            exit;
+        }
+
+        if (empty($id)) {
+            header("Location: /teapp/checklist");
+            exit;
+        }
+
+        $model = new \App\Models\Checklist();
+        $ret = $model->excluir($id);
+
+        $_SESSION['dbDelete'] = $ret ? true : false;
+        header("Location: /teapp/checklist");
+        exit;
+    }
+
+    public function Editar($id)
+    {
+
+        if (!$this->podeEditar) {
+            $_SESSION['permEdit'] = true;
+            header("Location: /teapp/rh");
+            exit;
+        }
+
+        $model = new \App\Models\Checklist();
+        $ret = $model->buscar_checklist($id);
+
+        if ($ret <> 0) {
+            $this->dados = $ret;
+
+            $view = new \Core\View("checklist/editar");
+            $view->setDados($this->dados);
+            $view->load();
+        } else {
+
+            echo "Checklist não encontrado.";
+        }
+    }
+
+    public function EditarAct()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            
+            $itens = [
+                'pneu_dianteiro_direito_foto',
+                'pneu_dianteiro_esquerdo_foto',
+                'pneu_traseiro_direito_foto',
+                'pneu_traseiro_esquerdo_foto',
+                'freios_foto',
+                'oleo_foto',
+                'luzes_foto',
+                'lataria_foto',
+                'nivel_agua_foto',
+                'equipamentos_seguranca_foto'
+            ];
+
+            $erros = [];
+
+            if (!empty($erros)) {
+                echo "<h3>Erros encontrados:</h3><ul>";
+                foreach ($erros as $erro) {
+                    echo "<li>$erro</li>";
+                }
+                echo "</ul>";
+                exit;
+            }
+
+            foreach ($itens as $item) {
+                $campo_foto = $item;
+                $nomeArquivo = uniqid() . "_" . $_FILES[$campo_foto]['name'];
+                $destino = 'uploads/checklists/' . $nomeArquivo;
+
+                if (!is_dir('uploads/checklists')) {
+                    mkdir('uploads/checklists', 0777, true);
+                }
+
+                move_uploaded_file($_FILES[$campo_foto]['tmp_name'], $destino);
+                $dados[$campo_foto] = $nomeArquivo;
+            }
+            $dados['origem'] = 'interno';
+
+            $model = new \App\Models\Checklist();
+            $ret = $model->editar($dados);
+
+            if ($ret) {
+                $_SESSION['dbUpdate'] = true;
+                header("Location: /teapp/checklist");
+                exit;
+            } else {
+                $_SESSION['dbUpdate'] = false;
+                header("Location: /teapp/checklist/editar/" . $dados['id_checklist']);
+                exit;
+            }
+        }
     }
 
 }
