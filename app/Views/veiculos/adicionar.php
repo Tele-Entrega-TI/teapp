@@ -50,17 +50,17 @@
 
             <div class="mb-3">
               <label class="form-label">Ano de Fabricação</label>
-              <input type="number" name="ano_fab" class="form-control" required>
+              <input type="text" name="ano_fab" class="form-control" required>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Vencimento do Documento</label>
-              <input type="date" name="vencimento_doc" class="form-control" required>
+              <input type="date" name="vencimento_doc" class="form-control">
             </div>
 
             <div class="mb-3">
               <label class="form-label">Titular do Veículo</label>
-              <input type="text" name="titular_veiculo" class="form-control" required>
+              <input type="text" name="titular_veiculo" class="form-control">
             </div>
 
             <div class="text-end">

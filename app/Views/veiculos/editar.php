@@ -52,18 +52,18 @@
 
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">Ano de Fabricação</label>
-                                <input type="number" name="ano_fab" class="form-control" value="<?= $this->dados['ano_fab'] ?? '' ?>" required>
+                                <input type="text" name="ano_fab" class="form-control" value="<?= $this->dados['ano_fab'] ?? '' ?>" required>
                             </div>
 
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">Vencimento do Documento</label>
-                                <input type="date" name="vencimento_doc" class="form-control" value="<?= $this->dados['vencimento_doc'] ?? '' ?>" required>
+                                <input type="date" name="vencimento_doc" class="form-control" value="<?= $this->dados['vencimento_doc'] ?? '' ?>">
                             </div>
 
 
                             <div class="col-md-8 mb-3">
                                 <label class="form-label">Titular do Veículo</label>
-                                <input type="text" name="titular_veiculo" class="form-control" value="<?= $this->dados['titular_veiculo'] ?? '' ?>" required>
+                                <input type="text" name="titular_veiculo" class="form-control" value="<?= $this->dados['titular_veiculo'] ?? '' ?>">
                             </div>
                         </div>
 
