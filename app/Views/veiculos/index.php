@@ -16,35 +16,60 @@
 
     <div class="row gy-4">
         <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <span class="fw-medium">Filtrar Veiculos</span>
+                </div>
+                <div class="col-md-3 text-end">
+                    
+                </div>
+            </div>    
+                    
+                    <hr>
+                    <br>
+                    <form method="post" class="">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" name="placa" class="form-control" placeholder="Placa"
+                                   value="<?php echo isset($_POST['placa']) ? htmlspecialchars($_POST['placa']) : ''; ?>">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="modelo" class="form-control" placeholder="Modelo"
+                                   value="<?php echo isset($_POST['modelo']) ? htmlspecialchars($_POST['modelo']) : ''; ?>">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" style="width:32px; height:32px; padding:0;">
+                                        <iconify-icon icon="solar:magnifer-linear" style="font-size:18px;"></iconify-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-*">
+                                <div class="form-check form-switch d-flex align-items-center ms-1">
+                                    <input class="form-check-input" type="checkbox" id="f-ativos" name="ativo" value="1"
+                                   <?php echo (isset($_POST['ativo']) && $_POST['ativo'] == '1') ? 'checked' : ''; ?>>
+                                    <label class="form-check-label ms-2" for="f-ativos">Somente ativos</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+
+                    </form>
+
+                    
+        </div>
+                <!-- Fim header -->
             <div class="card">
 
                 <!-- Header apenas com o filtro -->
                 <div class="card-header d-flex align-items-center flex-wrap gap-2">
-                    <form method="post" class="d-flex flex-wrap align-items-center gap-2">
-                        <input type="text" name="placa" class="form-control form-control-sm" placeholder="Placa"
-                               value="<?php echo isset($_POST['placa']) ? htmlspecialchars($_POST['placa']) : ''; ?>">
-
-                        <input type="text" name="modelo" class="form-control form-control-sm" placeholder="Modelo"
-                               value="<?php echo isset($_POST['modelo']) ? htmlspecialchars($_POST['modelo']) : ''; ?>">
-
-                        <div class="form-check form-switch d-flex align-items-center ms-1">
-                            <input class="form-check-input" type="checkbox" id="f-ativos" name="ativo" value="1"
-                                   <?php echo (isset($_POST['ativo']) && $_POST['ativo'] == '1') ? 'checked' : ''; ?>>
-                            <label class="form-check-label ms-2" for="f-ativos">Somente ativos</label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" style="width:32px; height:32px; padding:0;">
-                        <iconify-icon icon="solar:magnifer-linear" style="font-size:18px;"></iconify-icon>
-                        </button>
-                    </form>
-
-                    <a href="/teapp/veiculos/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1">
+                        <a href="/teapp/veiculos/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
                     <iconify-icon icon="ph:plus-circle" style="font-size: 18px;"></iconify-icon>
                     Adicionar
                     </a>
-                </div>
-                <!-- Fim header -->
-
+                </div>    
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table vertical-striped-table mb-0">
@@ -129,8 +154,7 @@
                         </table>
                     </div>
                 </div>
-
             </div><!-- card end -->
-        </div>
     </div>
+    
 </div>

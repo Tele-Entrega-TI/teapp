@@ -116,7 +116,7 @@ class View
         
         if(file_exists('app/Views/'.$this->view.'.php'))
         {   
-            if ($this->view <> "auth_Login/index") {
+            if ($this->view <> "login/index") {
                 include ('app/Views/templates/header.php');
                 include ('app/Views/'.$this->view.'.php');
                 include ('app/Views/templates/footer.php');

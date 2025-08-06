@@ -33,14 +33,13 @@ Class Usuarios extends DB {
 	public function adicionar($dados) {
 	    $id_funcionario = $dados['id_funcionario'];
 	    $cpf = $dados['cpf'];
-	    $id_grupo = $dados['id_grupo'];
 
-	    $sql = "INSERT INTO usuarios (id_funcionario, cpf, senha, id_grupo)
+	    $sql = "INSERT INTO usuarios (id_funcionario, cpf, senha)
 	            VALUES (
 	                $id_funcionario,
 	                '" . $this->conn->real_escape_string($cpf) . "',
-	                NULL,
-	                $id_grupo
+	                NULL
+	                
 	            )";
 
 	    return $this->conn->query($sql);
