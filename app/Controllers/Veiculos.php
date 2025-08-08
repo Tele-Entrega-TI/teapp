@@ -36,25 +36,32 @@ class Veiculos {
 
     public function Index() {
         
-    $model = new \App\Models\Veiculos();
+        $model = new \App\Models\Veiculos();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $filtros = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $ret = $model->filtrar($filtros);
-    } else {
-        $ret = $model->index();
-    }
+        $formatador = new \Core\Formatador();
 
-    if ($ret <> false) {
-        $this->dados = $ret;
-        $view = new \Core\View("veiculos/index");
-        $view->setDados($this->dados);
-        $view->load();
-    } else {
-        $view = new \Core\View("veiculos/index");
-        $view->load();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $filtros = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            $ret = $model->filtrar($filtros);
+        } else {
+            $ret = $model->index();
+        }
+
+        if ($ret <> false) {
+
+            $ret = $formatador->setCaps($ret);
+            $this->dados = $ret;
+            
+            $view = new \Core\View("veiculos/index");
+            $view->setDados($this->dados);
+            $view->load();
+        } else {
+
+            $view = new \Core\View("veiculos/index");
+            $view->load();
+        }
     }
-}
 
 
 
@@ -76,7 +83,12 @@ class Veiculos {
 
     public function AdicionarACT() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+            $formatador = new \Core\Formatador();
+            $dadosForm = $formatador->setLower($dadosForm);
+
             $model = new \App\Models\Veiculos();
             $ret = $model->adicionar($dadosForm);
 
@@ -111,10 +123,15 @@ class Veiculos {
     }
 
     public function EditarACT() {
+
         $model = new \App\Models\Veiculos();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['placa'])) {
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+            $formatador = new \Core\Formatador();
+            $dadosForm = $formatador->setLower($dadosForm);
+
             $ret = $model->editar($dadosForm);
 
             $_SESSION['dbUpdate'] = $ret ? true : false;
