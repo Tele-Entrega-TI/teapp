@@ -134,6 +134,19 @@ class View
                 </script>"; 
             }
         } 
+        if(isset($_SESSION['metodoNaoExiste'])) {
+            if ($_SESSION['metodoNaoExiste'] === true) {
+                $this->alert= "<script type= 'text/javascript'>
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Esse Método Não Existe',
+                        footer: 'Consulte o administrador do sistema para mais informações.',
+                        confirmButtonText: 'Entendi',
+                        confirmButtonColor: '#0dcaf0'
+                    });
+                </script>"; 
+            }
+        } 
 
         $this->view = $view;    
     } 
@@ -177,6 +190,7 @@ class View
             unset($_SESSION['permDelete']); 
             unset($_SESSION['semPermissaoAoModulo']); 
             unset($_SESSION['paginaNaoExiste']); 
+            unset($_SESSION['metodoNaoExiste']); 
             unset($this->alert);
         }
     }

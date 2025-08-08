@@ -108,7 +108,7 @@ class Oficinas {
 
         if (!$this->podeExcluir) {
             $_SESSION['permDelete'] = true;
-            header("Location: /teapp/operacional");
+            header("Location: /teapp/oficinas");
             exit;
         }
         

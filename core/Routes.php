@@ -64,7 +64,8 @@ class Routes
                 }
 
             } else {
-                echo "O metodo que você está chamando não existe!";
+                $_SESSION['metodoNaoExiste'] = true;
+                header("Location: /teapp/{$this->urlConjunto[0]}");
             }
         } else {
             $_SESSION['paginaNaoExiste'] = true;
