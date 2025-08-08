@@ -23,7 +23,7 @@ class Gestores {
         $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
 
         if (!str_contains($this->acesso, 'v')) {
-            header("Location: /teapp/rh");
+            header("Location: /teapp/");
             exit;
         }
 

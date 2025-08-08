@@ -16,16 +16,16 @@ class Veiculos {
         $modulo_id = 2;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
-            header("Location: /teapp/operacional");
+            header("Location: /teapp/");
             exit;
         }
 
         $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
 
-        if (!str_contains($this->acesso, 'v')) {
-            header("Location: /teapp/operacional");
-            exit;
-        }
+       /* if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/");
+            exit; 
+        } */
 
         $this->podeEditar  = str_contains($this->acesso, 'e'); 
         $this->podeExcluir = str_contains($this->acesso, 'd'); 
@@ -35,25 +35,32 @@ class Veiculos {
 
     public function Index() {
         
-    $model = new \App\Models\Veiculos();
+        $model = new \App\Models\Veiculos();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $filtros = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $ret = $model->filtrar($filtros);
-    } else {
-        $ret = $model->index();
-    }
+        $formatador = new \Core\Formatador();
 
-    if ($ret <> false) {
-        $this->dados = $ret;
-        $view = new \Core\View("veiculos/index");
-        $view->setDados($this->dados);
-        $view->load();
-    } else {
-        $view = new \Core\View("veiculos/index");
-        $view->load();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $filtros = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            $ret = $model->filtrar($filtros);
+        } else {
+            $ret = $model->index();
+        }
+
+        if ($ret <> false) {
+
+            $ret = $formatador->setCaps($ret);
+            $this->dados = $ret;
+            
+            $view = new \Core\View("veiculos/index");
+            $view->setDados($this->dados);
+            $view->load();
+        } else {
+
+            $view = new \Core\View("veiculos/index");
+            $view->load();
+        }
     }
-}
 
 
 
@@ -75,7 +82,12 @@ class Veiculos {
 
     public function AdicionarACT() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+            $formatador = new \Core\Formatador();
+            $dadosForm = $formatador->setLower($dadosForm);
+
             $model = new \App\Models\Veiculos();
             $ret = $model->adicionar($dadosForm);
 
@@ -110,10 +122,15 @@ class Veiculos {
     }
 
     public function EditarACT() {
+
         $model = new \App\Models\Veiculos();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['placa'])) {
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+            $formatador = new \Core\Formatador();
+            $dadosForm = $formatador->setLower($dadosForm);
+
             $ret = $model->editar($dadosForm);
 
             $_SESSION['dbUpdate'] = $ret ? true : false;

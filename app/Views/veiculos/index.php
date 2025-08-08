@@ -115,7 +115,7 @@
                                                 . date('d/m/Y', strtotime($key['vencimento_doc'])) .
                                                 '</span>'; 
 
-                                        '</td>';
+                                        echo '</td>';
 
                                         echo '<td class="text-center">';
                                         if (!empty($key['data_ultimo_checklist'])) {
