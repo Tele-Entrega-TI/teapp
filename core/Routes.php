@@ -67,7 +67,9 @@ class Routes
                 echo "O metodo que você está chamando não existe!";
             }
         } else {
-            echo "ERRO 404 - FILES NOT EXIST";
+            $_SESSION['paginaNaoExiste'] = true;
+            header("Location: /teapp/");
+
         }
     }
 

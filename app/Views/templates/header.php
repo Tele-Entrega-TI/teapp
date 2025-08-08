@@ -40,25 +40,25 @@
     <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
   </button>
   <div>
-    <a href="index.html" class="sidebar-logo">
-      <img src="./src/assets/images/logo.jpg" alt="site logo" class="light-logo">
-      <img src="./src/assets/images/logo-light.png" alt="site logo" class="dark-logo">
-      <img src="./src/assets/images/logo-icon.png" alt="site logo" class="logo-icon">
+    <a href="/teapp" class="sidebar-logo">
+      <img src="/teapp/src/assets/images/logo.jpg" alt="site logo" class="light-logo">
+      <img src="/teapp/src/assets/images/logo-light.png" alt="site logo" class="dark-logo">
+      <img src="/teapp/src/assets/images/logo-icon.png" alt="site logo" class="logo-icon">
     </a>
   </div>
   <div class="sidebar-menu-area">
     <ul class="sidebar-menu" id="sidebar-menu">
-      <li class="dropdown">
+      <!-- <li class="dropdown">
         <a href="javascript:void(0)">
           <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
-          <span>Dashboard</span>
+          <span>Menu Principal</span>
         </a>
         <ul class="sidebar-submenu">
           <li>
-            <a href="./"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Inicio</a>
+            <a href="/teapp"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Inicio</a>
           </li>
           <li>
-            <a href="./operacional"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Operacional</a>
+            <a href="/teapp/operacional"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Operacional</a>
           </li>
           <li>
             <a href="./comercial"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Comercial</a>
@@ -73,7 +73,7 @@
             <a href="./controladoria"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Controladoria</a>
           </li>
         </ul>
-      </li>
+      </li> -->
            <li class="dropdown">
         <a href="javascript:void(0)">
           <iconify-icon icon="solar:clipboard-text-outline" class="menu-icon"></iconify-icon>
@@ -116,13 +116,13 @@
         </a>
         <ul class="sidebar-submenu">
           <li>
-            <a href="./relatorios/custo-operacional"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Faltas</a>
+            <a href="/teapp/custo-operacional"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Faltas</a>
           </li>
           <li>
-            <a href="./relatorios/custo-operacional"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Intercorências</a>
+            <a href="/teapp/intercorrencias"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Intercorências</a>
           </li>
           <li>
-            <a href="./relatorios/custo-operacional"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Custo Operacional</a>
+            <a href="/teapp/custo-operacional"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Custo Operacional</a>
           </li>
         </ul>
       </li>

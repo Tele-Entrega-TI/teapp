@@ -4,9 +4,9 @@
         <h6 class="fw-semibold mb-0">Itens de Orçamento</h6>
         <ul class="d-flex align-items-center gap-2">
             <li class="fw-medium">
-                <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
+                <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-                    Dashboard
+                    Início
                 </a>
             </li>
             <li>-</li>
@@ -20,8 +20,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-9"></div>
-                        <div class="col-lg-3 text-end">
-                            <a href="/teapp/itens/adicionar" class="btn btn-primary text-end">Adicionar</a>
+                        <div class="card-header d-flex align-items-center flex-wrap gap-2">
+                            <a href="/teapp/itens/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
+                                <iconify-icon icon="lucide:plus-circle" style="font-size: 18px;"></iconify-icon>
+                                Adicionar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +56,7 @@
                                         
                                         
                                         echo '<td class="text-center">
-                                                <span class="bg-success-focus text-success-main px-32 py-4 rounded-pill fw-medium text-sm">'
+                                                <span class="badge text-sm fw-semibold text-success-600 bg-success-100 px-20 py-9 radius-4 text-white">'
                                                   . number_format($key['valor'], 2, ',', '.') 
                                                 . '</span>
                                               </td>';
@@ -61,10 +64,14 @@
                                     
                                         echo '<td class="text-center">
                                                 <a href="/teapp/itens/editar/' . intval($key['id_item']) . '" 
-                                                   class="btn btn-sm btn-info me-2">Editar</a>
+                                                   class="btn btn-sm btn-secondary p-3 me-1" title="Editar">
+                                                        <iconify-icon icon="solar:pen-new-round-line-duotone" class="icon text-md"></iconify-icon>
+                                                   </a>
                                                 <a href="/teapp/itens/excluir/' . intval($key['id_item']) . '" 
                                                    onclick="return confirm(\'Deseja realmente excluir este item?\');" 
-                                                   class="btn btn-sm btn-danger">Excluir</a>
+                                                   class="btn btn-sm btn-outline-secondary p-3" title="Excluir">
+                                                        <iconify-icon icon="solar:trash-bin-minimalistic-line-duotone" class="icon text-md"></iconify-icon>
+                                                   </a>
                                               </td>';
                                         
                                         echo '</tr>';

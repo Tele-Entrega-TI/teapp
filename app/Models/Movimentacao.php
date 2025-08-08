@@ -122,4 +122,41 @@ class Movimentacao extends DB {
         $query = $this->conn->query($sql);
         return $query ? 1 : 0;
     }
+
+    public function filtrar($filtros) {
+
+        $sql = "SELECT mvo_veiculos.*, cad_veiculos.placa, cad_veiculos.modelo, cad_funcionarios.apelido AS nome_funcionario
+                FROM mvo_veiculos
+                INNER JOIN cad_veiculos ON mvo_veiculos.id_veiculo = cad_veiculos.id_veiculo
+                LEFT JOIN cad_funcionarios ON mvo_veiculos.id_funcionario = cad_funcionarios.id_funcionario
+                WHERE mvo_veiculos.id_veiculo = cad_veiculos.id_veiculo";
+
+        if (!empty($filtros['placa'])) {
+            $placa = $this->conn->real_escape_string($filtros['placa']);
+            $sql .= " AND cad_veiculos.placa LIKE '%{$placa}%'";
+        }
+
+        if (!empty($filtros['modelo'])) {
+            $modelo = $this->conn->real_escape_string($filtros['modelo']);
+            $sql .= " AND cad_veiculos.modelo LIKE '%{$modelo}%'";
+        }
+
+        if (isset($filtros['ativo']) && $filtros['ativo'] !== '') {
+            $ativo = (int)$filtros['ativo'];
+            $sql .= " AND mvo_veiculos.ativo = {$ativo}";
+        }
+
+        $sql .= " ORDER BY id_veiculo DESC";
+
+        $ret = $this->conn->query($sql);
+
+        if ($ret && $ret->num_rows > 0) {
+            while ($row = $ret->fetch_assoc()) {
+                $obj[] = $row;
+            }
+            return $obj;
+        }
+
+        return 0;
+    }
 }

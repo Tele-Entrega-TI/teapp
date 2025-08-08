@@ -3,9 +3,9 @@
     <h6 class="fw-semibold mb-0">Orçamentos</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
-        <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
+        <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-          Dashboard
+          Início
         </a>
       </li>
       <li>-</li>
@@ -19,8 +19,11 @@
         <div class="card-header">
           <div class="row">
             <div class="col-lg-9"></div>
-            <div class="col-lg-3 text-end">
-              <a href="/teapp/orcamento/Adicionar" class="btn btn-primary">Adicionar</a>
+            <div class="card-header d-flex align-items-center flex-wrap gap-2">
+              <a href="/teapp/orcamento/Adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
+                <iconify-icon icon="lucide:plus-circle" style="font-size: 18px;"></iconify-icon>
+                Adicionar
+              </a>
             </div>
           </div>
         </div>
@@ -97,12 +100,12 @@
 
                     
                     echo '<td class="text-end">
-                            <a href="/teapp/orcamento/Editar/' . $key['id_orcamento'] . '" class="btn btn-info btn-sm">
-                              Editar
+                            <a href="/teapp/orcamento/Editar/' . $key['id_orcamento'] . '" class="btn btn-sm btn-secondary p-3 me-1" title="Editar">
+                              <iconify-icon icon="solar:pen-new-round-line-duotone" class="icon text-md"></iconify-icon>
                             </a>
-                            <a href="/teapp/orcamento/Excluir/' . $key['id_orcamento'] . '" class="btn btn-danger btn-sm"
+                            <a href="/teapp/orcamento/Excluir/' . $key['id_orcamento'] . '" class="btn btn-sm btn-outline-secondary p-3" title="Excluir"
                                onclick="return confirm(\'Tem certeza que deseja excluir este orçamento?\');">
-                              Excluir
+                              <iconify-icon icon="solar:trash-bin-minimalistic-line-duotone" class="icon text-md"></iconify-icon>
                             </a>
                           </td>';
 

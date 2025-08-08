@@ -107,6 +107,33 @@ class View
                 </script>"; 
             }
         } 
+        if(isset($_SESSION['semPermissaoAoModulo'])) {
+            if ($_SESSION['semPermissaoAoModulo'] === true) {
+                $this->alert= "<script type= 'text/javascript'>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Acesso Negado',
+                        text: 'Voce não tem permissão para acessar este módulo.',
+                        footer: 'Consulte o administrador do sistema para mais informações.',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Entendi'
+                    });
+                </script>"; 
+            }
+        } 
+        if(isset($_SESSION['paginaNaoExiste'])) {
+            if ($_SESSION['paginaNaoExiste'] === true) {
+                $this->alert= "<script type= 'text/javascript'>
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Essa Página Não Existe',
+                        footer: 'Consulte o administrador do sistema para mais informações.',
+                        confirmButtonText: 'Entendi',
+                        confirmButtonColor: '#0dcaf0',
+                    });
+                </script>"; 
+            }
+        } 
 
         $this->view = $view;    
     } 
@@ -148,6 +175,8 @@ class View
             unset($_SESSION['doubleCPF']);
             unset($_SESSION['permEdit']);
             unset($_SESSION['permDelete']); 
+            unset($_SESSION['semPermissaoAoModulo']); 
+            unset($_SESSION['paginaNaoExiste']); 
             unset($this->alert);
         }
     }

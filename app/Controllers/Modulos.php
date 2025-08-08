@@ -15,16 +15,17 @@ class Modulos {
         $modulo_id = 23;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
-            header("Location: /teapp/operacional");
+            $_SESSION['semPermissaoAoModulo'] = true;
+            header("Location: /teapp/");
             exit;
         }
 
         $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
 
-        if (!str_contains($this->acesso, 'v')) {
-            header("Location: /teapp/operacional");
-            exit;
-        }
+        // if (!str_contains($this->acesso, 'v')) {
+        //     header("Location: /teapp/operacional");
+        //     exit;
+        // }
 
         $this->podeEditar  = str_contains($this->acesso, 'e'); 
         $this->podeExcluir = str_contains($this->acesso, 'd'); 

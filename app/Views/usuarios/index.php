@@ -6,7 +6,7 @@
             <li class="fw-medium">
                 <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-                    Dashboard
+                    Início
                 </a>
             </li>
             <li>-</li>
@@ -20,8 +20,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-9"></div>
-                        <div class="col-lg-3 text-end">
-                            <a href="/teapp/usuarios/adicionar" class="btn btn-primary text-end">Adicionar</a>
+                        <div class="card-header d-flex align-items-center flex-wrap gap-2">
+                            <a href="/teapp/usuarios/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
+                                <iconify-icon icon="lucide:plus-circle" style="font-size: 18px;"></iconify-icon>
+                                Adicionar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +54,7 @@
                                         echo '</td>';
 
                                         echo '<td class="text-center">
-                                            <a href="/teapp/usuarios/excluir/' . $key['id_usuario'] . '" class="btn btn-sm btn-outline-secondary p-3" onclick="return confirm(\'Tem certeza que deseja desativar este usuário?\')">
+                                            <a href="/teapp/usuarios/excluir/' . $key['id_usuario'] . '" class="btn btn-sm btn-outline-secondary p-3" onclick="return confirm(\'Tem certeza que deseja desativar este usuário?\')" title="Excluir">
                                                 <iconify-icon icon="solar:trash-bin-minimalistic-line-duotone" class="icon text-md"></iconify-icon>
                                             </a>
                                         </td>';

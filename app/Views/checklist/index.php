@@ -20,8 +20,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-9"></div>
-                        <div class="col-lg-3 text-end">
-                            <a href="/teapp/checklist/adicionar" class="btn btn-primary text-end">Adicionar</a>
+                        <div class="card-header d-flex align-items-center flex-wrap gap-2">
+                            <a href="/teapp/checklist/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
+                              <iconify-icon icon="lucide:plus-circle" style="font-size: 18px;"></iconify-icon>
+                              Adicionar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -45,11 +48,14 @@
                                         echo '<td class="text-center">' . $key['assinatura_motorista'] . '</td>';
                                         echo '<td class="text-center">' . $key['placa'] . '</td>';
                                         echo '<td class="text-center">' . $key['tipo'] . '</td>';
-                                        echo '<td class="text-center">' . date("d-m-y",strtotime($key['data_checklist'])) . '</td>';
+                                        echo '<td class="text-center"><span class="badge text-sm fw-semibold text-info-600 bg-info-100 px-20 py-9 radius-4 text-white">' . date("d/m/y",strtotime($key['data_checklist'])) . '</span></td>';
                                         echo '<td class="text-center">
-                                                <a href="/teapp/checklist/ver/' . $key['id_checklist'] . '" class="btn btn-sm btn-info me-2">Detalhar</a>
-                                                <a href="/teapp/checklist/excluir/' . $key['id_checklist'] . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Tem certeza que deseja excluir?\')">Excluir</a>
-
+                                                <a href="/teapp/checklist/ver/' . $key['id_checklist'] . '" class="btn btn-sm btn-secondary p-3 me-1" title="Detalhes">
+                                                  <iconify-icon icon="mdi:format-list-bulleted" class="icon text-md"></iconify-icon>
+                                                </a>
+                                                <a href="/teapp/checklist/excluir/' . $key['id_checklist'] . '" class="btn btn-sm btn-outline-secondary p-3" onclick="return confirm(\'Tem certeza que deseja excluir?\')" title="Excluir">
+                                                  <iconify-icon icon="solar:trash-bin-minimalistic-line-duotone" class="icon text-md"></iconify-icon>
+                                                </a>
                                               </td>';
                                         echo '</tr>';
                                     }

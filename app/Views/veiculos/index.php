@@ -6,7 +6,7 @@
             <li class="fw-medium">
                 <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-                    Dashboard
+                    Início
                 </a>
             </li>
             <li>-</li>
@@ -28,30 +28,45 @@
                     <hr>
                     <br>
                     <form method="post" class="">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input type="text" name="placa" class="form-control" placeholder="Placa"
-                                   value="<?php echo isset($_POST['placa']) ? htmlspecialchars($_POST['placa']) : ''; ?>">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" name="modelo" class="form-control" placeholder="Modelo"
-                                   value="<?php echo isset($_POST['modelo']) ? htmlspecialchars($_POST['modelo']) : ''; ?>">
-                            </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" style="width:32px; height:32px; padding:0;">
-                                        <iconify-icon icon="solar:magnifer-linear" style="font-size:18px;"></iconify-icon>
-                                </button>
-                            </div>
-                        </div>
+                        <div class="row align-items-end">
+    <!-- Campo: Placa -->
+    <div class="col-md-5 mb-3">
+        <div class="input-group">
+            <label for="placa" class="input-group-text">Placa</label>
+            <input type="text" name="placa" id="placa" class="form-control" placeholder="Ex: ABC-1234"
+                aria-label="Placa"
+                value="<?php echo isset($_POST['placa']) ? htmlspecialchars($_POST['placa']) : ''; ?>">
+        </div>
+    </div>
+
+    <!-- Campo: Modelo -->
+    <div class="col-md-5 mb-3">
+        <div class="input-group">
+            <label class="input-group-text" for="modelo">Modelo</label>
+            <input type="text" name="modelo" id="modelo" class="form-control" placeholder="Ex: Onix"
+                aria-label="Modelo"
+                value="<?php echo isset($_POST['modelo']) ? htmlspecialchars($_POST['modelo']) : ''; ?>">
+        </div>
+    </div>
+
+    <!-- Botão de busca -->
+    <div class="col-md-2 mb-3 d-flex justify-content-start">
+        <button type="submit" class="btn btn-primary d-flex align-items-center gap-2">
+            <iconify-icon icon="lucide:search" width="18" height="18"></iconify-icon>
+            Filtrar
+        </button>
+    </div>
+</div>
+
                         <br>
                         <div class="row">
-                            <div class="col-md-*">
-                                <div class="form-check form-switch d-flex align-items-center ms-1">
-                                    <input class="form-check-input" type="checkbox" id="f-ativos" name="ativo" value="1"
-                                   <?php echo (isset($_POST['ativo']) && $_POST['ativo'] == '1') ? 'checked' : ''; ?>>
-                                    <label class="form-check-label ms-2" for="f-ativos">Somente ativos</label>
-                                </div>
-                            </div>
+                            <div class="col-md-3 py-2">
+    <div class="form-check form-switch d-flex align-items-center">
+        <label class="form-check-label me-2" for="f-ativos">Exibir apenas ativos</label>
+        <input class="form-check-input" type="checkbox" id="f-ativos" name="ativo" value="1"
+            <?php echo (isset($_POST['ativo']) && $_POST['ativo'] == '1') ? 'checked' : ''; ?>>
+    </div>
+</div>
                         </div>
                         <br>
                         <hr>
@@ -66,7 +81,7 @@
                 <!-- Header apenas com o filtro -->
                 <div class="card-header d-flex align-items-center flex-wrap gap-2">
                         <a href="/teapp/veiculos/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
-                    <iconify-icon icon="ph:plus-circle" style="font-size: 18px;"></iconify-icon>
+                    <iconify-icon icon="lucide:plus-circle" style="font-size: 18px;"></iconify-icon>
                     Adicionar
                     </a>
                 </div>    

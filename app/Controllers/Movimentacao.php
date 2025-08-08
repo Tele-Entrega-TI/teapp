@@ -2,11 +2,13 @@
 
 namespace App\Controllers;
 
-class Movimentacao {
+class Movimentacao
+{
 
     private array $dados;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         if (!isset($_SESSION['id_user'])) {
             header("Location: /teapp/login");
@@ -16,34 +18,60 @@ class Movimentacao {
         $modulo_id = 6;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
-            header("Location: /teapp/operacional");
+            $_SESSION['semPermissaoAoModulo'] = true;
+            header("Location: /teapp/");
             exit;
         }
 
         $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
 
-        if (!str_contains($this->acesso, 'v')) {
-            header("Location: /teapp/operacional");
-            exit;
+        // if (!str_contains($this->acesso, 'v')) {
+        //     header("Location: /teapp/operacional");
+        //     exit;
+        // }
+
+        $this->podeEditar = str_contains($this->acesso, 'e');
+        $this->podeExcluir = str_contains($this->acesso, 'd');
+    }
+
+    public function Index()
+    {
+        $model = new \App\Models\Movimentacao();
+        // $ret = $model->index();
+
+        // $view = new \Core\View("movimentacao/index");
+
+        // $this->dados['movimentacoes'] = ($ret <> 0) ? $ret : [];
+        // $view->setDados($this->dados);
+        // $view->load();
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $filtros = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            $ret = $model->filtrar($filtros);
+        } else {
+            $ret = $model->index();
         }
 
-        $this->podeEditar  = str_contains($this->acesso, 'e'); 
-        $this->podeExcluir = str_contains($this->acesso, 'd'); 
+        if ($ret <> false) {
+            $this->dados = $ret;
+            $view = new \Core\View("movimentacao/index");
+            $view->setDados($this->dados);
+            $view->load();
+        } else {
+            $view = new \Core\View("movimentacao/index");
+            $view->load();
+        }
+
+
+
+
+
     }
 
-    public function Index() {
-        $model = new \App\Models\Movimentacao();
-        $ret = $model->index();
 
-        $view = new \Core\View("movimentacao/index");
-
-        $this->dados['movimentacoes'] = ($ret <> 0) ? $ret : [];
-        $view->setDados($this->dados);
-        $view->load();
-    }
-
-
-    public function Adicionar() {
+    public function Adicionar()
+    {
 
         if (!$this->podeEditar) {
             $_SESSION['permEdit'] = true;
@@ -61,7 +89,8 @@ class Movimentacao {
         $view->load();
     }
 
-    public function AdicionarACT() {    
+    public function AdicionarACT()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
             $model = new \App\Models\Movimentacao();
@@ -73,7 +102,8 @@ class Movimentacao {
         }
     }
 
-    public function Finalizar($id_veiculo) {
+    public function Finalizar($id_veiculo)
+    {
 
         if (!$this->podeExcluir) {
             $_SESSION['permDelete'] = true;
@@ -84,10 +114,10 @@ class Movimentacao {
         $model = new \App\Models\Movimentacao();
         $ret = $model->finalizar($id_veiculo);
 
-            if ($ret) {
+        if ($ret) {
             header("Location: /teapp/movimentacao");
-                exit;
-            } else {
+            exit;
+        } else {
             echo "Erro ao finalizar movimentação.";
         }
     }

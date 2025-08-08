@@ -3,9 +3,9 @@
     <h6 class="fw-semibold mb-0">Locações</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
-        <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
+        <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-          Dashboard
+          Início
         </a>
       </li>
       <li>-</li>
@@ -16,9 +16,11 @@
   <div class="row gy-4">
     <div class="col-lg-12">
       <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h6 class="mb-0">Lista de Locações</h6>
-          <a href="/teapp/locacoes/adicionar" class="btn btn-primary btn-sm">Adicionar</a>
+        <div class="card-header d-flex align-items-center flex-wrap gap-2">
+          <a href="/teapp/locacoes/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
+            <iconify-icon icon="lucide:plus-circle" style="font-size: 18px;"></iconify-icon>
+            Adicionar
+          </a>
         </div>
 
         <div class="card-body">
@@ -61,9 +63,13 @@
                     echo '</td>';
 
                     echo '<td>
-                            <a href="/teapp/locacoes/editar/' . $key['id_locacao'] . '" class="btn btn-info btn-sm">Editar</a>
-                            <a href="/teapp/locacoes/excluir/' . $key['id_locacao'] . '" class="btn btn-danger btn-sm"
-                               onclick="return confirm(\'Tem certeza que deseja excluir esta locação?\');">Excluir</a>
+                            <a href="/teapp/locacoes/editar/' . $key['id_locacao'] . '" class="btn btn-sm btn-secondary p-3 me-1" title="Editar">
+                              <iconify-icon icon="solar:pen-new-round-line-duotone" class="icon text-md"></iconify-icon>
+                            </a>
+                            <a href="/teapp/locacoes/excluir/' . $key['id_locacao'] . '" class="btn btn-sm btn-outline-secondary p-3"
+                               onclick="return confirm(\'Tem certeza que deseja excluir esta locação?\');" title="Excluir">
+                                <iconify-icon icon="solar:trash-bin-minimalistic-line-duotone" class="icon text-md"></iconify-icon>
+                               </a>
                           </td>';
 
                     echo '</tr>';

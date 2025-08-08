@@ -3,13 +3,13 @@
     <h6 class="fw-semibold mb-0">Novo Setor</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
-        <a href="/teapp/rh" class="d-flex align-items-center gap-1 hover-text-primary">
+        <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-          Dashboard
+          Início
         </a>
       </li>
       <li>-</li>
-      <li class="fw-medium"><a href="/teapp">Setores</a></li>
+      <li class="fw-medium"><a href="/teapp/setores">Setores</a></li>
       <li>-</li>
       <li class="fw-medium">Novo Setor</li>
     </ul>

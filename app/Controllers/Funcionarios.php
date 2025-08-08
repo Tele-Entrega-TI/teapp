@@ -16,16 +16,17 @@ class Funcionarios {
         $modulo_id = 14;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
-            header("Location: /teapp/rh");
+            $_SESSION['semPermissaoAoModulo'] = true;
+            header("Location: /teapp/");
             exit;
         }
 
         $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
 
-        if (!str_contains($this->acesso, 'v')) {
-            header("Location: /teapp/rh");
-            exit;
-        }
+        // if (!str_contains($this->acesso, 'v')) {
+        //     header("Location: /teapp/rh");
+        //     exit;
+        // }
 
         $this->podeEditar  = str_contains($this->acesso, 'e'); 
         $this->podeExcluir = str_contains($this->acesso, 'd'); 
