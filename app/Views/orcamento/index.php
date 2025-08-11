@@ -94,8 +94,8 @@
                     
                     echo '<td class="text-center">'
                          . ($key['status_aprovado'] === '1'
-                             ? '<span class="text-success">Sim</span>'
-                             : '<span class="text-danger">Não</span>')
+                             ? '<span class="text-success">'.strtoupper('Sim</span>')
+                             : '<span class="text-danger">'.strtoupper('NÃo</span>'))
                          . '</td>';
 
                     

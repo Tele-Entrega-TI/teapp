@@ -37,6 +37,8 @@ class Movimentacao
     public function Index()
     {
         $model = new \App\Models\Movimentacao();
+        $formatador = new \Core\Formatador();
+
         // $ret = $model->index();
 
         // $view = new \Core\View("movimentacao/index");
@@ -54,6 +56,7 @@ class Movimentacao
         }
 
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view = new \Core\View("movimentacao/index");
             $view->setDados($this->dados);

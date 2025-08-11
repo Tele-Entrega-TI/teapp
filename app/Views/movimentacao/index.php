@@ -119,12 +119,12 @@
 
                     echo '<td class="text-center"><span class="text-sm fw-semibold text-info-600 bg-info-100 px-20 py-9 radius-4 text-white">' . date('d/m/Y', strtotime($key['data_entrega'])) . '</span></td>';
 
-                    echo '<td class="text-center">' . ($key['contrato_assinado'] == 1 ? 'Sim' : 'Não') . '</td>';
+                    echo '<td class="text-center">' . (strtoupper($key['contrato_assinado'] == 1 ? 'Sim' : 'Não')) . '</td>';
 
                     echo '<td class="text-center">';
                     echo ($key['ativo'] == 1)
-                        ? '<span class="badge bg-success text-white">Ativa</span>'
-                        : '<span class="badge bg-secondary text-white">Finalizada</span>';
+                        ? '<span class="badge bg-success text-white">'.strtoupper('Ativa</span>')
+                        : '<span class="badge bg-secondary text-white">'.strtoupper('Finalizada</span>');
                     echo '</td>';
 
                     echo '<td class="text-center">';

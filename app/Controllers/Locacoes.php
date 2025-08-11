@@ -34,10 +34,12 @@ class Locacoes {
 
     public function Index() {
         $model = new \App\Models\Locacoes();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         $view = new \Core\View("locacoes/index");
         if ($ret != 0) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view->setDados($this->dados);
         }

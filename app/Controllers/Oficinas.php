@@ -35,9 +35,11 @@ class Oficinas {
     public function index() {
 
         $model = new \App\Models\Oficinas();
+        $formatador = new \Core\Formatador();
         $ret   = $model->index();
         $view = new \Core\View("oficinas/index");
         if ($ret !== 0) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view->setDados($this->dados);
         } else {

@@ -65,8 +65,8 @@
                          . '</td>';
                     echo '<td class="text-center">'
                            . ($key['aprovado'] === '1'
-                               ? '<span class="text-success">Sim</span>'
-                               : '<span class="text-danger">Não</span>')
+                               ? '<span class="text-success">'.strtoupper('Sim</span>')
+                               : '<span class="text-danger">'.strtoupper('NÃo</span>'))
                          . '</td>';
                     echo '<td class="text-center">'
                            . ($key['nome_funcionario'] ?? '<span class="text-muted">—</span>')

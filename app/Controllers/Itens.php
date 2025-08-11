@@ -35,10 +35,12 @@ class Itens {
 
     public function index() {
         $model = new \App\Models\Itens();
+        $formatador = new \Core\Formatador();
         $ret   = $model->index();
 
         $view = new \Core\View("itens/index");
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view->setDados($this->dados);
         }

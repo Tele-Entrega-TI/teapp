@@ -35,9 +35,11 @@ class Gestores {
 
     public function Index() {
         $model = new \App\Models\Gestores();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view = new \Core\View("gestores/index");
             $view->setDados($this->dados);

@@ -38,10 +38,13 @@ class Checklist
     {
 
         $model = new \App\Models\Checklist();
+        $formatador = new \Core\Formatador();
+
         $ret = $model->index();
 
         $view = new \Core\View("checklist/index");
         if ($ret <> 0) {
+            $ret = $formatador->setCaps($ret);
             $this->dados['checklists'] = $ret;
             $this->dados['model'] = $model;
             $view->setDados($this->dados);

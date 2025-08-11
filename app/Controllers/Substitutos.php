@@ -33,10 +33,12 @@ class Substitutos {
 
     public function Index() {
         $model = new \App\Models\Substitutos();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         $view = new \Core\View("substitutos/index");
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view->setDados($this->dados);
         }

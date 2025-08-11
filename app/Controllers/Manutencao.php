@@ -35,10 +35,13 @@ class Manutencao {
 
     public function Index() {
         $model = new \App\Models\Manutencao();
+        $formatador = new \Core\Formatador();
+
         $ret   = $model->index();
 
         $view = new \Core\View("manutencao/index");
-        if ($ret <> false) {$ret;
+        if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view->setDados($this->dados);
         }

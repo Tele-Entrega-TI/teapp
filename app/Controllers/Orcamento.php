@@ -34,9 +34,11 @@ class Orcamento {
 
     public function Index() {
         $model = new \App\Models\Orcamento();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view = new \Core\View("orcamento/index");
             $view->setDados($this->dados);
