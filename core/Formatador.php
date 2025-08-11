@@ -8,10 +8,14 @@ class Formatador {
     public function setCaps($dados) {
 
         if (!is_array($dados)) {
-            return strtoupper(trim($dados));
+            $texto = trim($dados);
+    
+            if (function_exists('mb_convert_case')) {
+                return mb_convert_case($texto, MB_CASE_UPPER, 'UTF-8');
+            }
+            return strtoupper($texto);
         }
 
-        // se for array associativo simples 
         $array_de_arrays = false;
         foreach ($dados as $valor) {
             if (is_array($valor)) {
@@ -20,16 +24,19 @@ class Formatador {
             }
         }
 
-        // se não for array de arrays
         if ($array_de_arrays == false) {
             $resultado = array();
             foreach (array_keys($dados) as $key) {
-                $resultado[$key] = strtoupper(trim($dados[$key]));
+                $texto = trim($dados[$key]);
+                if (function_exists('mb_convert_case')) {
+                    $resultado[$key] = mb_convert_case($texto, MB_CASE_UPPER, 'UTF-8');
+                } else {
+                    $resultado[$key] = strtoupper($texto);
+                }
             }
             return $resultado;
         }
 
-        // se for array de arrays
         $this->dados = array();
         foreach (array_keys($dados) as $key) {
             $this->dados[$key] = $this->setCaps($dados[$key]);
@@ -37,6 +44,7 @@ class Formatador {
 
         return $this->dados;
     }
+
 
     public function setLower($dados) {
 
