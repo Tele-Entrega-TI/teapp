@@ -13,7 +13,7 @@ Class Usuarios {
             exit;
         }
 
-        $modulo_id = 6;
+        $modulo_id = 7;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
             $_SESSION['semPermissaoAoModulo'] = true;

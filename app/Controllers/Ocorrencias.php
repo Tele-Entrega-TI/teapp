@@ -4,7 +4,31 @@ namespace App\Controllers;
 
 class Ocorrencias {
  private array $dados;
- public function __construct(){}
+ private string $acesso;
+ public function __construct(){
+       if (!isset($_SESSION['id_user'])) {
+            header("Location: /teapp/login");
+            exit;
+        }
+
+        $modulo_id = 9;
+
+        if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
+            $_SESSION['semPermissaoAoModulo'] = true;
+            header("Location: /teapp/");
+            exit;
+        }
+
+        $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
+
+        // if (!str_contains($this->acesso, 'v')) {
+        //     header("Location: /teapp/operacional");
+        //     exit;
+        // }
+
+        $this->podeEditar  = str_contains($this->acesso, 'e'); 
+        $this->podeExcluir = str_contains($this->acesso, 'd'); 
+ }
  
    public function index(){
 

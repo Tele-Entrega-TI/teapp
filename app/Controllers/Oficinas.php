@@ -13,7 +13,7 @@ class Oficinas {
             exit;
         }
 
-        $modulo_id = 6;
+        $modulo_id = 18;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
             $_SESSION['semPermissaoAoModulo'] = true;

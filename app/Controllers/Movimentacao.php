@@ -15,7 +15,7 @@ class Movimentacao
             exit;
         }
 
-        $modulo_id = 6;
+        $modulo_id = 3;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
             $_SESSION['semPermissaoAoModulo'] = true;

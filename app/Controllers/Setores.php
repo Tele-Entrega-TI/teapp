@@ -5,6 +5,9 @@ class Setores {
 
     private array $dados;
     private array $dadosAux;
+    private string $acesso;
+    private string $podeExcluir;
+    private string $podeEditar;
 
     public function __construct() {
 
@@ -13,7 +16,7 @@ class Setores {
             exit;
         }
 
-        $modulo_id = 6;
+        $modulo_id = 15;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
             $_SESSION['semPermissaoAoModulo'] = true;

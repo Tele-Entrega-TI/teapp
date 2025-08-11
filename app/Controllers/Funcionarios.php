@@ -1,12 +1,17 @@
 <?php
 namespace App\Controllers;
 
-class Funcionarios {
+class Funcionarios
+{
 
     private array $dados;
     private array $dadosAux;
+    private string $acesso;
+    private string $podeExcluir;
+    private string $podeEditar;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         if (!isset($_SESSION['id_user'])) {
             header("Location: /teapp/login");
@@ -16,23 +21,25 @@ class Funcionarios {
         $modulo_id = 14;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
-            header("Location: /teapp/rh");
+            $_SESSION['semPermissaoAoModulo'] = true;
+            header("Location: /teapp/");
             exit;
         }
 
         $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
 
-        if (!str_contains($this->acesso, 'v')) {
-            header("Location: /teapp/rh");
-            exit;
-        }
+        // if (!str_contains($this->acesso, 'v')) {
+        //     header("Location: /teapp/rh");
+        //     exit;
+        // }
 
-        $this->podeEditar  = str_contains($this->acesso, 'e'); 
-        $this->podeExcluir = str_contains($this->acesso, 'd'); 
+        $this->podeEditar = str_contains($this->acesso, 'e');
+        $this->podeExcluir = str_contains($this->acesso, 'd');
     }
 
 
-    public function Index() {
+    public function Index()
+    {
         $model = new \App\Models\Funcionarios();
         $ret = $model->index();
 
@@ -47,7 +54,8 @@ class Funcionarios {
         }
     }
 
-    public function Adicionar() {
+    public function Adicionar()
+    {
 
         if (!$this->podeEditar) {
             $_SESSION['permEdit'] = true;
@@ -59,7 +67,8 @@ class Funcionarios {
         $view->load();
     }
 
-    public function AdicionarACT() {
+    public function AdicionarACT()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $dadosForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
             $model = new \App\Models\Funcionarios();
@@ -77,21 +86,23 @@ class Funcionarios {
         }
     }
 
-        public function Ver($id) {
-            $model = new \App\Models\Funcionarios();
-            $ret = $model->buscar($id);
+    public function Ver($id)
+    {
+        $model = new \App\Models\Funcionarios();
+        $ret = $model->buscar($id);
 
-            $view = new \Core\View("funcionarios/ver");
-            if ($ret) {
-                $this->dados = $ret;
-                $view->setDados($this->dados);
-            }
-            $view->load();
+        $view = new \Core\View("funcionarios/ver");
+        if ($ret) {
+            $this->dados = $ret;
+            $view->setDados($this->dados);
         }
+        $view->load();
+    }
 
 
 
-    public function Editar($id) {
+    public function Editar($id)
+    {
 
         if (!$this->podeEditar) {
             $_SESSION['permEdit'] = true;
@@ -102,19 +113,20 @@ class Funcionarios {
         $model = new \App\Models\Funcionarios();
         $ret = $model->buscar($id);
 
-            if ($ret <> 0) {
+        if ($ret <> 0) {
             $this->dados = $ret;
 
             $view = new \Core\View("funcionarios/editar");
             $view->setDados($this->dados);
             $view->load();
-            } else {
+        } else {
 
             echo "Funcionario não encontrado.";
         }
     }
 
-    public function EditarAct() {
+    public function EditarAct()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
             $model = new \App\Models\Funcionarios();
@@ -132,7 +144,8 @@ class Funcionarios {
         }
     }
 
-    public function Excluir($id) {
+    public function Excluir($id)
+    {
         $model = new \App\Models\Funcionarios();
         $ret = $model->excluir($id);
 

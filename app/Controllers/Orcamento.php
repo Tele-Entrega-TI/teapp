@@ -13,7 +13,7 @@ class Orcamento {
             exit;
         }
 
-        $modulo_id = 6;
+        $modulo_id = 11;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
             $_SESSION['semPermissaoAoModulo'] = true;
