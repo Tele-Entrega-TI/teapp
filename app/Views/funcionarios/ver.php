@@ -3,9 +3,9 @@
     <h6 class="fw-semibold mb-0">Detalhes do Funcionário</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
-        <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
+        <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-          Início
+          Dashboard
         </a>
       </li>
       <li>-</li>
@@ -44,9 +44,10 @@
                     <div><strong>Nome Completo:</strong> <?= $f['nome']; ?></div>
                     <div><strong>Apelido:</strong> <?= $f['apelido']; ?></div>
                     <div><strong>Sexo:</strong> <?= $f['sexo']; ?></div>
-                    <div><strong>Data de Nascimento:</strong> <?= !empty($f['data_nascimento']) ? date("d/m/Y", strtotime($f['data_nascimento'])) : ''; ?></div>
-                    <div><strong>Nome da Mãe:</strong> <?= $f['nome_mae']; ?></div>
-                    <div><strong>Nome do Pai:</strong> <?= $f['nome_pai']; ?></div>
+                    <div><strong>Data de Nascimento:</strong> <?= !empty($f['nascimento']) ? date("d/m/Y", strtotime($f['nascimento'])) : ''; ?></div>
+                    <div><strong>Nome da Mãe:</strong> <?= !empty($f['nome_mae']) ? $f['nome_mae'] : '—'; ?></div>
+                    <div><strong>Nome do Pai:</strong> <?= !empty($f['nome_pai']) ? $f['nome_pai'] : '—'; ?></div>
+                    <div><strong>Nome da(o) Esposa(o):</strong> <?= !empty($f['nome_esposa']) ? $f['nome_esposa'] : '—'; ?></div>
                   </div>
                 </div>
               </div>
@@ -56,7 +57,15 @@
                     <h6 class="fw-bold border-bottom pb-2 mb-3">Contato</h6>
                     <div><strong>E-mail:</strong> <?= $f['email']; ?></div>
                     <div><strong>Telefone:</strong> <?= $f['telefone']; ?></div>
-                    <div><strong>Endereço:</strong> <?= $f['endereco']; ?></div>
+                    <div><strong>Nome da Pessoa de Emergência:</strong> <?= $f['nome_emergencia']; ?></div>
+                    <div><strong>Número da Contato de Emergência:</strong> <?= $f['telefone_emergencia']; ?></div>
+                    <div><strong>Rua:</strong> <?= $f['rua']; ?></div>
+                    <div><strong>Número da Casa:</strong> <?= $f['numero_casa']; ?></div>
+                    <div><strong>Complemento:</strong> <?= $f['complemento']; ?></div>
+                    <div><strong>Cep:</strong> <?= $f['cep']; ?></div>
+                    <div><strong>Bairro:</strong> <?= $f['bairro']; ?></div>
+                    <div><strong>Cidade:</strong> <?= $f['cidade']; ?></div>
+                    <div><strong>UF:</strong> <?= $f['uf']; ?></div>
                   </div>
                 </div>
               </div>
@@ -69,7 +78,8 @@
                     <div><strong>Órgão Emissor:</strong> <?= $f['org_emissor']; ?></div>
                     <div><strong>CTPS:</strong> <?= $f['ctps']; ?></div>
                     <div><strong>PIS:</strong> <?= $f['pis']; ?></div>
-                    <div><strong>Habilitação:</strong> <?= $f['habilitacao']; ?></div>
+                    <div><strong>Habilitação:</strong> <?= $f['cnh']; ?></div>
+                    <div><strong>Data de Admissão:</strong> <?= !empty($f['admissao']) ? date("d/m/Y", strtotime($f['admissao'])) : ''; ?></div>
                   </div>
                 </div>
               </div>

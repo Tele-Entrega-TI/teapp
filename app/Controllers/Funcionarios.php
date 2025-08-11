@@ -16,17 +16,16 @@ class Funcionarios {
         $modulo_id = 14;
 
         if (!isset($_SESSION['modulos_permissoes'][$modulo_id])) {
-            $_SESSION['semPermissaoAoModulo'] = true;
-            header("Location: /teapp/");
+            header("Location: /teapp/rh");
             exit;
         }
 
         $this->acesso = $_SESSION['modulos_permissoes'][$modulo_id];
 
-        // if (!str_contains($this->acesso, 'v')) {
-        //     header("Location: /teapp/rh");
-        //     exit;
-        // }
+        if (!str_contains($this->acesso, 'v')) {
+            header("Location: /teapp/rh");
+            exit;
+        }
 
         $this->podeEditar  = str_contains($this->acesso, 'e'); 
         $this->podeExcluir = str_contains($this->acesso, 'd'); 
@@ -130,6 +129,18 @@ class Funcionarios {
                 header("Location: /teapp/funcionarios/editar/" . $dados['id_funcionario']);
                 exit;
             }
+        }
+    }
+
+    public function Excluir($id) {
+        $model = new \App\Models\Funcionarios();
+        $ret = $model->excluir($id);
+
+        if ($ret != 0) {
+            $_SESSION['dbDelete'] = true;
+            header("Location: /teapp/funcionarios");
+        } else {
+            echo "funcionário não encontrado.";
         }
     }
 

@@ -30,25 +30,35 @@ class Funcionarios extends DB {
         $nome = $dados['nome'];
         $apelido = $dados['apelido'];
         $sexo = $dados['sexo'];
-        $cpf = $dados['cpf'];
-        $rg = $dados['rg'];
+        $nascimento = $dados['nascimento'];
         $nome_mae = $dados['nome_mae'];
         $nome_pai = $dados['nome_pai'];
-        $data_nascimento = $dados['data_nascimento'];
+        $nome_esposa = $dados['nome_esposa'];
         $email = $dados['email'];
         $telefone = $dados['telefone'];
-        $cargo = $dados['cargo'];
-        $endereco = $dados['endereco'];
-        $habilitacao = $dados['habilitacao'];
-        $ctps = $dados['ctps'];
+        $nome_emergencia = $dados['nome_emergencia'];
+        $telefone_emergencia = $dados['telefone_emergencia'];
+        $rua = $dados['rua'];
+        $numero_casa = $dados['numero_casa'];
+        $complemento = $dados['complemento'];
+        $cep = $dados['cep'];
+        $bairro = $dados['bairro'];
+        $cidade = $dados['cidade'];
+        $uf = $dados['uf'];
+        $rg = $dados['rg'];
+        $cpf = $dados['cpf'];
         $org_emissor = $dados['org_emissor'];
+        $cnh = $dados['cnh'];
+        $ctps = $dados['ctps'];
         $pis = $dados['pis'];
-        $data_admissao = $dados['data_admissao'];
+        $admissao = $dados['admissao'];
+
+
 
         $sql = "INSERT INTO cad_funcionarios
-            (nome, apelido, sexo, cpf, rg, nome_mae, nome_pai, data_nascimento, email, telefone, cargo, endereco, habilitacao, ctps, org_emissor, pis, data_admissao)
+            (nome, apelido, sexo, nascimento, nome_mae, nome_pai, nome_esposa, email, telefone, nome_emergencia, telefone_emergencia, rua, numero_casa, complemento, cep, bairro, cidade, uf, rg, cpf, org_emissor, cnh, ctps, pis, admissao)
             VALUES
-            ('$nome', '$apelido', '$sexo', '$cpf', '$rg', '$nome_mae', '$nome_pai', '$data_nascimento', '$email', '$telefone', '$cargo', '$endereco', '$habilitacao', '$ctps', '$org_emissor', '$pis', '$data_admissao')";
+            ('$nome', '$apelido', '$sexo', '$nascimento', '$nome_mae', '$nome_pai', '$nome_esposa', '$email', '$telefone', '$nome_emergencia', '$telefone_emergencia', '$rua', '$numero_casa', '$complemento', '$cep', '$bairro', '$cidade', '$uf', '$rg', '$cpf', '$org_emissor', '$cnh', '$ctps', '$pis', '$admissao')";
 
         $exec = $this->conn->query($sql);
 
@@ -72,25 +82,60 @@ class Funcionarios extends DB {
     }
 
     public function editar(array $dados){
-        $sql = "UPDATE cad_funcionarios SET
-            nome = '{$dados['nome']}',
-            apelido = '{$dados['apelido']}',
-            sexo = '{$dados['sexo']}',
-            cpf = '{$dados['cpf']}',
-            rg = '{$dados['rg']}',
-            nome_mae = '{$dados['nome_mae']}',
-            nome_pai = '{$dados['nome_pai']}',
-            data_nascimento = '{$dados['data_nascimento']}',
-            email = '{$dados['email']}',
-            telefone = '{$dados['telefone']}',
-            cargo = '{$dados['cargo']}',
-            endereco = '{$dados['endereco']}',
-            habilitacao = '{$dados['habilitacao']}',
-            ctps = '{$dados['ctps']}',
-            org_emissor = '{$dados['org_emissor']}',
-            pis = '{$dados['pis']}',
-            data_admissao = '{$dados['data_admissao']}'
-            WHERE id_funcionario = {$dados['id_funcionario']}";
+        $nome = $dados['nome'];
+        $apelido = $dados['apelido'];
+        $sexo = $dados['sexo'];
+        $nascimento = $dados['nascimento'];
+        $nome_mae = $dados['nome_mae'];
+        $nome_pai = $dados['nome_pai'];
+        $nome_esposa = $dados['nome_esposa'];
+        $email = $dados['email'];
+        $telefone = $dados['telefone'];
+        $nome_emergencia = $dados['nome_emergencia'];
+        $telefone_emergencia = $dados['telefone_emergencia'];
+        $rua = $dados['rua'];
+        $numero_casa = $dados['numero_casa'];
+        $complemento = $dados['complemento'];
+        $cep = $dados['cep'];
+        $bairro = $dados['bairro'];
+        $cidade = $dados['cidade'];
+        $uf = $dados['uf'];
+        $rg = $dados['rg'];
+        $cpf = $dados['cpf'];
+        $org_emissor = $dados['org_emissor'];
+        $cnh = $dados['cnh'];
+        $ctps = $dados['ctps'];
+        $pis = $dados['pis'];
+        $admissao = $dados['admissao'];
+        $id = $dados['id_funcionario'];
+
+        $sql = "UPDATE cad_funcionarios SET 
+        nome = '$nome',
+        apelido = '$apelido',
+        sexo = '$sexo',
+        nascimento = '$nascimento',
+        nome_mae = '$nome_mae',
+        nome_pai = '$nome_pai',
+        nome_esposa = '$nome_esposa',
+        email = '$email',
+        telefone = '$telefone',
+        nome_emergencia = '$nome_emergencia',
+        telefone_emergencia = '$telefone_emergencia',
+        rua = '$rua',
+        numero_casa = '$numero_casa',
+        complemento = '$complemento',
+        cep = '$cep',
+        bairro = '$bairro',
+        cidade = '$cidade',
+        uf = '$uf',
+        rg = '$rg',
+        cpf = '$cpf',
+        org_emissor = '$org_emissor',
+        cnh = '$cnh',
+        ctps = '$ctps',
+        pis = '$pis',
+        admissao = '$admissao'
+        WHERE id_funcionario = $id";
 
         $exec = $this->conn->query($sql);
 
@@ -134,4 +179,4 @@ class Funcionarios extends DB {
             exit;
         }
     }
-}
+}  

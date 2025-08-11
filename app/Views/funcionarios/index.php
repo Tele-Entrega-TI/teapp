@@ -4,9 +4,9 @@
         <h6 class="fw-semibold mb-0">Funcionários</h6>
         <ul class="d-flex align-items-center gap-2">
             <li class="fw-medium">
-                <a href="/teapp/" class="d-flex align-items-center gap-1 hover-text-primary">
+                <a href="/teapp/operacional" class="d-flex align-items-center gap-1 hover-text-primary">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-                    Início
+                    Dashboard
                 </a>
             </li>
             <li>-</li>
@@ -30,10 +30,12 @@
                         <table class="table vertical-striped-table mb-0">
                             <thead>
                                 <tr>
+                                    <th class="text-center">Matrícula</th>
                                     <th class="text-center">Nome</th>
                                     <th class="text-center">Apelido</th>
-                                    <th class="text-center">Cargo</th>
+                                    <th class="text-center">Cpf</th>
                                     <th class="text-center">Telefone</th>
+                                    <th class="text-center">Admissão</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
                             </thead>
@@ -42,10 +44,12 @@
                                 if (!empty($this->dados) && is_array($this->dados)) {
                                     foreach ($this->dados as $key) {
                                         echo '<tr>';
+                                        echo '<td class="text-center">' . $key['id_funcionario'] . '</td>';
                                         echo '<td class="text-center">' . $key['nome'] . '</td>';
                                         echo '<td class="text-center">' . $key['apelido'] . '</td>';
-                                        echo '<td class="text-center">' . $key['cargo'] . '</td>';
+                                        echo '<td class="text-center">' . $key['cpf'] . '</td>';
                                         echo '<td class="text-center">' . $key['telefone'] . '</td>';
+                                        echo '<td class="text-center">' . date("d/m/Y", strtotime($key['admissao'])) . '</td>';
                                         echo '<td class="text-center">
                                                 <a href="/teapp/funcionarios/ver/' . $key['id_funcionario'] . '" class="btn btn-sm btn-info me-2">Detalhar</a>
                                                 <a href="/teapp/funcionarios/excluir/' . $key['id_funcionario'] . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Tem certeza que deseja excluir?\')">Excluir</a>
