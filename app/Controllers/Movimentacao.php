@@ -66,10 +66,6 @@ class Movimentacao
             $view->load();
         }
 
-
-
-
-
     }
 
 

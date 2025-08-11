@@ -52,6 +52,7 @@ class Funcionarios extends DB {
         $ctps = $dados['ctps'];
         $pis = $dados['pis'];
         $admissao = $dados['admissao'];
+        
 
 
 
@@ -72,7 +73,16 @@ class Funcionarios extends DB {
     }
 
     public function buscar($id) {
-        $sql = "SELECT * FROM cad_funcionarios WHERE id_funcionario = $id";
+        $sql = "SELECT 
+                f.*,
+                dp.id_cargo,
+                cc.nome AS nome_cargo
+            FROM cad_funcionarios f
+            LEFT JOIN dados_profissionais dp
+                ON dp.id_funcionario = f.id_funcionario
+            LEFT JOIN cad_cargos cc
+                ON cc.id_cargo = dp.id_cargo
+            WHERE f.id_funcionario = " . $id;
         $res = $this->conn->query($sql);
 
         if ($res && $res->num_rows > 0) {
@@ -107,7 +117,6 @@ class Funcionarios extends DB {
         $ctps = $dados['ctps'];
         $pis = $dados['pis'];
         $admissao = $dados['admissao'];
-        $id = $dados['id_funcionario'];
 
         $sql = "UPDATE cad_funcionarios SET 
         nome = '$nome',

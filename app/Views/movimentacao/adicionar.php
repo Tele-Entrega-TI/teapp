@@ -29,7 +29,7 @@
                 <?php
                 if (!empty($this->dados['veiculos']) && is_array($this->dados['veiculos'])) {
                   foreach ($this->dados['veiculos'] as $v) {
-                    echo '<option value="' . $v['id_veiculo'] . '">' . $v['placa'] . ' - ' . $v['modelo'] . '</option>';
+                    echo mb_strtoupper('<option value="' . $v['id_veiculo'] . '">' . $v['placa'] . ' - ' . $v['modelo'] . '</option>', 'UTF-8');
                   }
                 }
                 ?>
@@ -43,7 +43,7 @@
                 <?php
                 if (!empty($this->dados['funcionarios']) && is_array($this->dados['funcionarios'])) {
                   foreach ($this->dados['funcionarios'] as $f) {
-                    echo '<option value="' . $f['id_funcionario'] . '">' . $f['nome'] . '</option>';
+                    echo mb_strtoupper('<option value="' . $f['id_funcionario'] . '">' . $f['nome'] . '</option>', 'UTF-8');
                   }
                 }
                 ?>
