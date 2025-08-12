@@ -119,7 +119,7 @@
 
                     echo '<td class="text-center"><span class="text-sm fw-semibold text-info-600 bg-info-100 px-20 py-9 radius-4 text-white">' . date('d/m/Y', strtotime($key['data_entrega'])) . '</span></td>';
 
-                    echo '<td class="text-center">' . (strtoupper($key['contrato_assinado'] == 1 ? 'Sim' : 'Não')) . '</td>';
+                    echo '<td class="text-center">' . (mb_strtoupper($key['contrato_assinado'] == 1 ? 'Sim' : 'Não','UTF-8')) . '</td>';
 
                     echo '<td class="text-center">';
                     echo ($key['ativo'] == 1)
