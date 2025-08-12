@@ -145,8 +145,8 @@
 
                                         echo '<td class="text-center">';
                                         echo ($key['ativo'] == 1)
-                                            ? mb_strtoupper('<span class="text-success">Sim</span>', 'UTF-8')
-                                            : mb_strtoupper('<span class="text-danger">Não</span>', 'UTF-8');
+                                            ? '<span class="text-success">'.mb_strtoupper('Sim</span>', 'UTF-8')
+                                            : '<span class="text-danger">'.mb_strtoupper('Não</span>', 'UTF-8');
                                         echo '</td>';
 
                                         echo '<td class="text-center">
