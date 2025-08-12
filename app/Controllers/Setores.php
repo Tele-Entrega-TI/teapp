@@ -37,9 +37,11 @@ class Setores {
 
     public function Index() {
         $model = new \App\Models\Setores();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view = new \Core\View("setores/index");
             $view->setDados($this->dados);
@@ -54,7 +56,7 @@ class Setores {
 
         if (!$this->podeEditar) {
             $_SESSION['permEdit'] = true;
-            header("Location: /teapp/operacional");
+            header("Location: /teapp/");
             exit;
         }
 
@@ -84,7 +86,7 @@ class Setores {
 
         if (!$this->podeEditar) {
             $_SESSION['permEdit'] = true;
-            header("Location: /teapp/operacional");
+            header("Location: /teapp/");
             exit;
         }
 
@@ -125,7 +127,7 @@ class Setores {
 
         if (!$this->podeExcluir) {
             $_SESSION['permDelete'] = true;
-            header("Location: /teapp/operacional");
+            header("Location: /teapp/");
             exit;
         }
 

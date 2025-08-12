@@ -37,9 +37,11 @@ class DadosProfissionais {
 
     public function Index() {
         $model = new \App\Models\DadosProfissionais();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view = new \Core\View("dadosprofissionais/index");
             $view->setDados($this->dados);

@@ -117,6 +117,7 @@ class Funcionarios extends DB {
         $ctps = $dados['ctps'];
         $pis = $dados['pis'];
         $admissao = $dados['admissao'];
+        $id = $dados['id_funcionario'];
 
         $sql = "UPDATE cad_funcionarios SET 
         nome = '$nome',

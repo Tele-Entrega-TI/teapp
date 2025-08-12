@@ -51,7 +51,7 @@
 
     <!-- Botão de busca -->
     <div class="col-md-2 mb-3 d-flex justify-content-start">
-        <button type="submit" class="btn btn-primary d-flex align-items-center gap-2">
+        <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center gap-1 align-self-end mt-1 text-right">
             <iconify-icon icon="lucide:search" width="18" height="18"></iconify-icon>
             Filtrar
         </button>
@@ -145,8 +145,8 @@
 
                                         echo '<td class="text-center">';
                                         echo ($key['ativo'] == 1)
-                                            ? '<span class="text-success">Sim</span>'
-                                            : '<span class="text-danger">Não</span>';
+                                            ? mb_strtoupper('<span class="text-success">Sim</span>', 'UTF-8')
+                                            : mb_strtoupper('<span class="text-danger">Não</span>', 'UTF-8');
                                         echo '</td>';
 
                                         echo '<td class="text-center">

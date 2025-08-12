@@ -20,8 +20,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-9"></div>
-                        <div class="col-lg-3 text-end">
-                            <a href="/teapp/setores/adicionar" class="btn btn-primary">Adicionar</a>
+                        <div class="card-header d-flex align-items-center flex-wrap gap-2">
+                            <a href="/teapp/setores/adicionar" class="btn btn-primary btn-sm ms-auto d-flex align-items-center gap-1 align-self-end mt-1 text-right">
+                                <iconify-icon icon="lucide:plus-circle" style="font-size: 18px;"></iconify-icon>
+                                Adicionar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -43,10 +46,14 @@
                                         echo '<tr>';
                                         echo '<td class="text-center">' . htmlspecialchars($key['nome']) . '</td>';
                                         echo '<td class="text-center">' . htmlspecialchars($key['descricao']) . '</td>';
-                                        echo '<td class="text-center">' . ($key['ativo'] ? 'Sim' : 'Não') . '</td>';
+                                        echo '<td class="text-center">' . mb_strtoupper(($key['ativo'] ? 'Sim' : 'Não') . '</td>','UTF-8');
                                         echo '<td class="text-center">
-                                                <a href="/teapp/setores/editar/' . $key['id_setor'] . '" class="btn btn-sm btn-info me-2">Editar</a>
-                                                <a href="/teapp/setores/excluir/' . $key['id_setor'] . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Tem certeza que deseja desativar este setor?\')">Desativar</a>
+                                                <a href="/teapp/setores/editar/' . $key['id_setor'] . '" class="btn btn-sm btn-secondary p-3 me-1" title="Editar">
+                                                    <iconify-icon icon="solar:pen-new-round-line-duotone" class="icon text-md"></iconify-icon>
+                                                </a>
+                                                <a href="/teapp/setores/excluir/' . $key['id_setor'] . '" class="btn btn-sm btn-outline-secondary p-3" title="Excluir" onclick="return confirm(\'Tem certeza que deseja desativar este setor?\')">
+                                                    <iconify-icon icon="solar:trash-bin-minimalistic-line-duotone" class="icon text-md"></iconify-icon>
+                                                </a>
                                               </td>';
                                         echo '</tr>';
                                     }

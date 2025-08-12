@@ -23,7 +23,7 @@ class Checklist extends DB {
                 LEFT JOIN cad_veiculos v ON c.id_veiculo = v.id_veiculo
                 LEFT JOIN mvo_veiculos mv ON mv.id_veiculo = v.id_veiculo AND mv.ativo = 1
                 LEFT JOIN cad_funcionarios f ON mv.id_funcionario = f.id_funcionario
-                LEFT JOIN cad_cargos cg ON f.cargo = cg.id_cargo
+                LEFT JOIN cad_cargos cg ON f.id_cargo = cg.id_cargo
                 WHERE c.origem = 'interno' AND c.ativo = 1
                 ORDER BY c.id_checklist DESC";
 

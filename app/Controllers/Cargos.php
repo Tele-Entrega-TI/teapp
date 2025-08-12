@@ -35,9 +35,11 @@ class Cargos {
 
     public function Index() {
         $model = new \App\Models\Cargos();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view = new \Core\View("cargos/index");
             $view->setDados($this->dados);

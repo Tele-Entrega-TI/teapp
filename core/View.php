@@ -167,7 +167,10 @@ class View
                 include ('app/Views/'.$this->view.'.php');
             }
         } else {
-            echo "Não achou a view";
+            // Mantém o usuário na mesma página quando a view de um método não existir e exibe um swal fire. 
+            $metodo = explode('/',$this->view);
+            $_SESSION['paginaNaoExiste'] = true;
+            header("Location: /teapp/{$metodo[0]}");
         }
 
     }

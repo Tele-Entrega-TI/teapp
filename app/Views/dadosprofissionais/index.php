@@ -70,7 +70,7 @@
                                         echo '</td>';
 
                                         echo '<td class="text-center">';
-                                        echo ($key['ativo'] == 1) ? '<span class="text-success">Sim</span>' : '<span class="text-danger">Não</span>';
+                                        echo ($key['ativo'] == 1) ? '<span class="text-success">'.mb_strtoupper('Sim</span>') : '<span class="text-danger">'.mb_strtoupper('Não</span>');
                                         echo '</td>';
 
                                         echo '<td class="text-center">

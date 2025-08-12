@@ -34,10 +34,12 @@ class Empresas {
 
     public function Index() {
         $model = new \App\Models\Empresas();
+        $formatador = new \Core\Formatador();
         $ret = $model->index();
 
         $view = new \Core\View("empresas/index");
         if ($ret <> false) {
+            $ret = $formatador->setCaps($ret);
             $this->dados = $ret;
             $view->setDados($this->dados);
         }

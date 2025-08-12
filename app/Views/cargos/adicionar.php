@@ -10,7 +10,7 @@
         </a>
       </li>
       <li>-</li>
-      <li class="fw-medium"><a href="/teapp">Cargos</a></li>
+      <li class="fw-medium"><a href="/teapp/cargos">Cargos</a></li>
       <li>-</li>
       <li class="fw-medium">Novo Cargo</li>
     </ul>
